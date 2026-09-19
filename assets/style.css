@@ -32,17 +32,27 @@
   --radius-md: 12px;
   --radius-sm: 8px;
 
-  /* Map badge: a fixed-color decorative "globe" object, same in both themes */
-  --map-badge-a: #6fa8e8;
-  --map-badge-b: #2f66aa;
-  --map-badge-c: #123a72;
-  --map-face-a: #ffffff;
-  --map-face-b: #eef4fb;
-  --map-face-c: #c9def4;
-  --map-side-a: #a9c8ec;
-  --map-side-b: #6f97c9;
-  --map-rim: rgba(255,255,255,0.85);
+  /* Map: a fixed-color decorative terrain relief object, same in both themes */
+  --map-badge-a: #2c5364;
+  --map-badge-b: #16313f;
+  --map-badge-c: #081820;
+  --map-face-a: #8fae53;
+  --map-face-b: #a9a35b;
+  --map-face-c: #b98f5e;
+  --map-side-a: #5c7a3d;
+  --map-side-b: #37491f;
+  --map-rim: rgba(255,255,255,0.35);
+  --map-river: rgba(163, 210, 224, 0.65);
   --map-label-ink: #16233a;
+
+  /* Factory pin icon */
+  --pin-wall: #f4f5f7;
+  --pin-wall-edge: #c7cbd1;
+  --pin-wall-base: #dde1e6;
+  --pin-roof: #d1453b;
+  --pin-roof-dark: #b23730;
+  --pin-window: #2c3e63;
+  --pin-smoke: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -297,15 +307,25 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .th-side { fill: url(#mapSideGrad); }
 .th-rim { fill: var(--map-rim); }
 .th-face { fill: url(#mapFaceGrad); stroke: var(--map-side-b); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-.th-sheen { fill: url(#mapSheenGrad); opacity: 0.6; pointer-events: none; }
+.th-texture { fill: #2b3a1e; opacity: 0.28; mix-blend-mode: multiply; pointer-events: none; }
+.th-sheen { fill: url(#mapSheenGrad); opacity: 0.16; mix-blend-mode: soft-light; pointer-events: none; }
+.th-river { fill: none; stroke: var(--map-river); stroke-width: 1.4; stroke-linecap: round; opacity: 0.8; }
+.th-lake { fill: var(--map-river); opacity: 0.85; }
 
 .site-pin { cursor: pointer; }
 .site-pin .pin-pulse { fill: var(--series-1); opacity: 0.4; transform-box: fill-box; transform-origin: center; animation: pinPulse 2.6s ease-out infinite; }
-.site-pin .pin-ground-shadow { fill: rgba(11,11,11,0.28); }
-.site-pin .pin-body { fill: var(--series-1); }
-.site-pin.active .pin-body { fill: var(--series-2); }
-.site-pin .pin-hole { fill: #ffffff; }
-.site-pin .pin-highlight { fill: #ffffff; opacity: 0.5; pointer-events: none; }
+.site-pin .pin-ground-shadow { fill: rgba(11,11,11,0.3); }
+.site-pin .pin-halo { fill: var(--series-1); opacity: 0.16; transition: opacity 0.15s, fill 0.15s; }
+.site-pin.active .pin-halo { fill: var(--series-2); opacity: 0.34; }
+.site-pin .factory-wall { fill: var(--pin-wall); stroke: var(--pin-wall-edge); stroke-width: 0.6; }
+.site-pin .factory-wall-base { fill: var(--pin-wall-base); }
+.site-pin .factory-roof { fill: var(--pin-roof); }
+.site-pin.active .factory-roof { fill: var(--pin-roof-dark); }
+.site-pin .factory-chimney { fill: var(--pin-wall); stroke: var(--pin-wall-edge); stroke-width: 0.4; }
+.site-pin .factory-chimney-band { fill: var(--pin-roof); }
+.site-pin .factory-window { fill: var(--pin-window); }
+.site-pin .factory-door { fill: var(--pin-roof); }
+.site-pin .factory-smoke { fill: var(--pin-smoke); opacity: 0.8; }
 .site-pin text {
   font-size: 13px; font-weight: 700; fill: var(--map-label-ink);
   paint-order: stroke; stroke: #ffffff; stroke-width: 3px; stroke-linejoin: round;

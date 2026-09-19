@@ -218,13 +218,27 @@ function renderMap() {
     pin.dataset.x = s.map_position.x;
     pin.dataset.y = s.map_position.y;
     pin.innerHTML = `
-      <ellipse class="pin-ground-shadow" cx="0" cy="3" rx="10" ry="3.5"></ellipse>
+      <ellipse class="pin-ground-shadow" cx="0" cy="2" rx="11" ry="3.5"></ellipse>
+      <circle class="pin-halo" cx="0" cy="-12" r="17"></circle>
       <circle class="pin-pulse" cx="0" cy="0" r="6"></circle>
-      <path class="pin-body" filter="url(#pinDropShadow)"
-        d="M0,0 C-12,-17 -14,-25 -14,-31 C-14,-42 -7.7,-50 0,-50 C7.7,-50 14,-42 14,-31 C14,-25 12,-17 0,0 Z"></path>
-      <circle class="pin-hole" cx="0" cy="-31" r="6.5"></circle>
-      <ellipse class="pin-highlight" cx="-5" cy="-40" rx="4" ry="6" transform="rotate(-25 -5 -40)"></ellipse>
-      <text x="19" y="-27">${s.name_th}</text>`;
+      <g filter="url(#pinDropShadow)">
+        <ellipse class="factory-smoke" cx="-7" cy="-40" rx="2.6" ry="2"></ellipse>
+        <ellipse class="factory-smoke" cx="-8.5" cy="-44.5" rx="2" ry="1.5"></ellipse>
+        <ellipse class="factory-smoke" cx="6.5" cy="-42" rx="2.6" ry="2"></ellipse>
+        <ellipse class="factory-smoke" cx="8" cy="-46.5" rx="2" ry="1.5"></ellipse>
+        <rect class="factory-chimney" x="-8.5" y="-34" width="3" height="9" rx="0.5"></rect>
+        <rect class="factory-chimney" x="5.5" y="-36" width="3" height="11" rx="0.5"></rect>
+        <rect class="factory-chimney-band" x="-8.5" y="-34" width="3" height="2.4"></rect>
+        <rect class="factory-chimney-band" x="5.5" y="-36" width="3" height="2.4"></rect>
+        <path class="factory-roof" d="M-13,-20 L13,-20 L10,-26.5 L-10,-26.5 Z"></path>
+        <rect class="factory-wall" x="-11" y="-20" width="22" height="20" rx="1.5"></rect>
+        <rect class="factory-wall-base" x="-11" y="-3.2" width="22" height="3.2"></rect>
+        <rect class="factory-window" x="-8" y="-16" width="3.4" height="3.4" rx="0.5"></rect>
+        <rect class="factory-window" x="-1.7" y="-16" width="3.4" height="3.4" rx="0.5"></rect>
+        <rect class="factory-window" x="4.6" y="-16" width="3.4" height="3.4" rx="0.5"></rect>
+        <rect class="factory-door" x="-3" y="-9" width="6" height="9" rx="1"></rect>
+      </g>
+      <text x="20" y="-9">${s.name_th}</text>`;
     pin.addEventListener("click", (e) => {
       e.stopPropagation();
       showPopup(s);
