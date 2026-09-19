@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=9" />
+<link rel="stylesheet" href="assets/style.css?v=10" />
 <script src="assets/chart.umd.js"></script>
 </head>
 <body>
@@ -23,6 +23,21 @@
     <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
   </div>
 </header>
+
+<!-- AI search bar -->
+<section class="ai-search-row">
+  <form class="ai-search-bar" id="aiSearchForm">
+    <span class="ai-plus" aria-hidden="true">+</span>
+    <input type="text" id="aiSearchInput" placeholder="ถามคำถาม หรือค้นหาชื่อโรงงาน/จังหวัด เช่น เชียงใหม่" autocomplete="off" />
+    <button type="button" class="icon-btn" aria-label="ค้นหาด้วยเสียง" title="ค้นหาด้วยเสียง">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4M8 23h8"/></svg>
+    </button>
+    <button type="submit" class="ai-mode-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z"/></svg>
+      AI Mode
+    </button>
+  </form>
+</section>
 
 <!-- KPI summary row -->
 <section class="kpi-row">
@@ -203,6 +218,6 @@
 
 </section>
 
-<script src="assets/app.js?v=9"></script>
+<script src="assets/app.js?v=10"></script>
 </body>
 </html>

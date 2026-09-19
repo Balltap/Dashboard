@@ -364,6 +364,33 @@ function resetMapView() {
   applyMapViewBox();
   updateZoomButtonsState();
 }
+function focusOnSite(site) {
+  const w = MAP_DEFAULT_VIEWBOX.w / 3.2;
+  const h = w * (MAP_BASE_VIEWBOX.h / MAP_BASE_VIEWBOX.w);
+  mapViewBox = clampMapViewBox({
+    x: site.map_position.x - w / 2,
+    y: site.map_position.y - h / 2,
+    w,
+    h,
+  });
+  applyMapViewBox();
+  updateZoomButtonsState();
+  showPopup(site);
+}
+function initAiSearchBar() {
+  const form = document.getElementById("aiSearchForm");
+  const input = document.getElementById("aiSearchInput");
+  if (!form || !input) return;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = input.value.trim().toLowerCase();
+    if (!q || !DATA) return;
+    const match = DATA.sites.find(
+      (s) => s.name_th.toLowerCase().includes(q) || s.province_th.toLowerCase().includes(q) || s.id.toLowerCase() === q
+    );
+    if (match) focusOnSite(match);
+  });
+}
 function initMapZoomPan() {
   const wrap = document.getElementById("mapWrap");
   const svg = document.getElementById("thailandMap");
@@ -695,6 +722,7 @@ fetch(DATA_URL, { cache: "no-store" })
     try {
       renderAll();
       initMapZoomPan();
+      initAiSearchBar();
     } catch (err) {
       document.body.innerHTML =
         '<p style="padding:40px;font-family:sans-serif;">เกิดข้อผิดพลาดขณะแสดงผลแดชบอร์ด: ' + err + "</p>";
