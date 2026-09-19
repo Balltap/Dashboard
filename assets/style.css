@@ -173,7 +173,7 @@ body { padding: 20px; max-width: 1600px; margin: 0 auto; }
 /* ---------- Main grid: left charts / map / site cards ---------- */
 .overview-grid {
   display: grid;
-  grid-template-columns: 300px 1fr 340px;
+  grid-template-columns: 300px 1fr;
   gap: 14px;
   margin-bottom: 16px;
   align-items: start;
@@ -226,28 +226,21 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 
 .map-popup {
   position: absolute;
-  transform: translate(-50%, -115%);
+  transform: translate(-50%, -112%);
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 10px 12px;
-  min-width: 190px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  padding: 12px;
+  width: 260px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.22);
   pointer-events: none;
   z-index: 5;
 }
-.map-popup .pop-title { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 13px; margin-bottom: 6px; }
-.map-popup .pop-badge { background: color-mix(in srgb, var(--status-critical) 18%, transparent); color: var(--status-critical); border-radius: 999px; padding: 1px 8px; font-size: 11px; font-weight: 700; }
-.map-popup .pop-row { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
-.map-popup .pop-row b { color: var(--text-primary); }
-.map-popup .meter-track { height: 5px; border-radius: 3px; background: var(--gridline); overflow: hidden; margin-top: 2px; }
-.map-popup .meter-fill { height: 100%; background: var(--series-1); }
 .map-legend { display: flex; gap: 12px; font-size: 11px; color: var(--text-muted); margin-top: 8px; flex-wrap: wrap; }
 .map-legend span { display: inline-flex; align-items: center; gap: 4px; }
 .map-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-/* ---------- Site cards ---------- */
-.site-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; background: var(--surface-2); }
+/* ---------- Site detail card (rendered inside the map pin popup) ---------- */
 .site-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
 .site-card-head .name { font-weight: 700; font-size: 14px; }
 .site-card-head .prov { font-size: 11px; color: var(--text-muted); }

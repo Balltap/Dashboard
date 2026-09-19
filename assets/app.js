@@ -219,6 +219,41 @@ function renderMap() {
   });
 }
 
+/* Shared markup: full site detail card, used inside the map pin popup */
+function siteCardHTML(s) {
+  return `
+    <div class="site-card-head">
+      <div><div class="name">${s.name_th}</div><div class="prov">${s.province_th} | ${s.country_th}</div></div>
+      <span class="status-pill">${s.status}</span>
+    </div>
+    <div class="site-card-metrics">
+      <div class="metric-block">
+        <div class="mb-label">ผลผลิตเยื่อไผ่</div>
+        <div class="mb-value">${fmtNum(s.production_ton_day)} <span style="font-size:11px;font-weight:400;">ตัน/วัน</span></div>
+        <div class="mb-sub">ใช้กำลังผลิต ${s.capacity_utilization_pct}% · ตอบสนองดีมานด์ ${s.demand_fulfillment_pct}%</div>
+      </div>
+      <div class="metric-block">
+        <div class="mb-label">สินค้าคงคลัง</div>
+        <div class="mb-value">${fmtNum(s.inventory_ton)} <span style="font-size:11px;font-weight:400;">ตัน</span></div>
+        <div class="mb-sub">ใช้พื้นที่คลัง ${s.storage_utilization_pct}%</div>
+      </div>
+      <div class="metric-block">
+        <div class="mb-label">กำลังไฟฟ้า</div>
+        <div class="mb-value">${s.power_mw} <span style="font-size:11px;font-weight:400;">MW</span></div>
+        <div class="mb-sub">พลังงานหมุนเวียน ${s.renewable_pct}% · ประสิทธิภาพ ${s.energy_efficiency_pct}%</div>
+      </div>
+      <div class="metric-block">
+        <div class="mb-label">สุขภาพเครื่องจักร</div>
+        <div class="mb-value">${s.asset_health_pct}%</div>
+        <div class="mini-bar-track" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${s.asset_health_pct}%; background:${cssVar(SITE_COLOR_VAR[s.id])}"></div></div>
+      </div>
+    </div>
+    <div class="site-card-foot">
+      <span>แจ้งเตือน: <b class="${s.anomalies_total >= 3 ? "crit-dot" : s.anomalies_total >= 1 ? "warn-dot" : ""}">${s.anomalies_total}</b></span>
+      <span>งานค้างกำหนด: <b class="${s.overdue_work_orders >= 1 ? "warn-dot" : ""}">${s.overdue_work_orders}</b></span>
+    </div>`;
+}
+
 function showPopup(site) {
   activePinId = site.id;
   document.querySelectorAll(".site-pin").forEach((p) => {
@@ -232,60 +267,12 @@ function showPopup(site) {
   popup.style.left = px + "px";
   popup.style.top = py + "px";
   popup.style.display = "block";
-  popup.innerHTML = `
-    <div class="pop-title">${site.name_th} <span class="pop-badge">${site.anomalies_total} แจ้งเตือน</span></div>
-    <div class="pop-row">การใช้กำลังผลิต <b>${site.capacity_utilization_pct}%</b></div>
-    <div class="meter-track"><div class="meter-fill" style="width:${site.capacity_utilization_pct}%"></div></div>
-    <div class="pop-row" style="margin-top:6px;">ประสิทธิภาพพลังงาน <b>${site.energy_efficiency_pct}%</b></div>
-    <div class="meter-track"><div class="meter-fill" style="width:${site.energy_efficiency_pct}%"></div></div>
-    <div class="pop-row" style="margin-top:6px;">ผลผลิต <b>${fmtNum(site.production_ton_day)} ตัน/วัน</b> · สต็อก <b>${fmtNum(site.inventory_ton)} ตัน</b></div>`;
+  popup.innerHTML = siteCardHTML(site);
 }
 document.addEventListener("click", () => {
   document.getElementById("mapPopup").style.display = "none";
   document.querySelectorAll(".site-pin").forEach((p) => p.classList.remove("active"));
 });
-
-/* ---------------- Site cards ---------------- */
-function renderSiteCards() {
-  const col = document.getElementById("siteCardsCol");
-  col.innerHTML = "";
-  DATA.sites.forEach((s) => {
-    const card = document.createElement("div");
-    card.className = "panel site-card";
-    card.innerHTML = `
-      <div class="site-card-head">
-        <div><div class="name">${s.name_th}</div><div class="prov">${s.province_th} | ${s.country_th}</div></div>
-        <span class="status-pill">${s.status}</span>
-      </div>
-      <div class="site-card-metrics">
-        <div class="metric-block">
-          <div class="mb-label">ผลผลิตเยื่อไผ่</div>
-          <div class="mb-value">${fmtNum(s.production_ton_day)} <span style="font-size:11px;font-weight:400;">ตัน/วัน</span></div>
-          <div class="mb-sub">ใช้กำลังผลิต ${s.capacity_utilization_pct}% · ตอบสนองดีมานด์ ${s.demand_fulfillment_pct}%</div>
-        </div>
-        <div class="metric-block">
-          <div class="mb-label">สินค้าคงคลัง</div>
-          <div class="mb-value">${fmtNum(s.inventory_ton)} <span style="font-size:11px;font-weight:400;">ตัน</span></div>
-          <div class="mb-sub">ใช้พื้นที่คลัง ${s.storage_utilization_pct}%</div>
-        </div>
-        <div class="metric-block">
-          <div class="mb-label">กำลังไฟฟ้า</div>
-          <div class="mb-value">${s.power_mw} <span style="font-size:11px;font-weight:400;">MW</span></div>
-          <div class="mb-sub">พลังงานหมุนเวียน ${s.renewable_pct}% · ประสิทธิภาพ ${s.energy_efficiency_pct}%</div>
-        </div>
-        <div class="metric-block">
-          <div class="mb-label">สุขภาพเครื่องจักร</div>
-          <div class="mb-value">${s.asset_health_pct}%</div>
-          <div class="mini-bar-track" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${s.asset_health_pct}%; background:${cssVar(SITE_COLOR_VAR[s.id])}"></div></div>
-        </div>
-      </div>
-      <div class="site-card-foot">
-        <span>แจ้งเตือน: <b class="${s.anomalies_total >= 3 ? "crit-dot" : s.anomalies_total >= 1 ? "warn-dot" : ""}">${s.anomalies_total}</b></span>
-        <span>งานค้างกำหนด: <b class="${s.overdue_work_orders >= 1 ? "warn-dot" : ""}">${s.overdue_work_orders}</b></span>
-      </div>`;
-    col.appendChild(card);
-  });
-}
 
 /* ---------------- Order execution ---------------- */
 function renderOrderExecution() {
@@ -478,7 +465,6 @@ function renderAll() {
   renderPowerMixChart();
   renderAnomalyTable();
   renderMap();
-  renderSiteCards();
   renderOrderExecution();
   renderPerformanceChart();
   renderInventoryChart();
