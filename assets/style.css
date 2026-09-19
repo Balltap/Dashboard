@@ -35,12 +35,15 @@
   /* Map pin label ink, fixed in both themes since it sits on a photo background */
   --map-label-ink: #16233a;
 
-  /* Factory pin icon */
-  --pin-wall: #f4f5f7;
+  /* Factory pin icon (isometric: front face + darker right-side face for depth) */
+  --pin-wall: #eef1f5;
+  --pin-wall-side: #c3c9d3;
   --pin-wall-edge: #c7cbd1;
-  --pin-wall-base: #dde1e6;
-  --pin-roof: #d1453b;
-  --pin-roof-dark: #b23730;
+  --pin-base-front: #26314f;
+  --pin-base-side: #151b30;
+  --pin-roof: #df453c;
+  --pin-roof-side: #a4362c;
+  --pin-roof-active: #b23730;
   --pin-window: #2c3e63;
   --pin-smoke: #ffffff;
 }
@@ -298,15 +301,19 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .site-pin .pin-ground-shadow { fill: rgba(11,11,11,0.3); }
 .site-pin .pin-halo { fill: var(--series-1); opacity: 0.16; transition: opacity 0.15s, fill 0.15s; }
 .site-pin.active .pin-halo { fill: var(--series-2); opacity: 0.34; }
-.site-pin .factory-wall { fill: var(--pin-wall); stroke: var(--pin-wall-edge); stroke-width: 0.6; }
-.site-pin .factory-wall-base { fill: var(--pin-wall-base); }
-.site-pin .factory-roof { fill: var(--pin-roof); }
-.site-pin.active .factory-roof { fill: var(--pin-roof-dark); }
+.site-pin .factory-wall-front { fill: var(--pin-wall); stroke: var(--pin-wall-edge); stroke-width: 0.5; }
+.site-pin .factory-wall-side { fill: var(--pin-wall-side); }
+.site-pin .factory-base-front { fill: var(--pin-base-front); }
+.site-pin .factory-base-side { fill: var(--pin-base-side); }
+.site-pin .factory-roof-front { fill: var(--pin-roof); }
+.site-pin.active .factory-roof-front { fill: var(--pin-roof-active); }
+.site-pin .factory-roof-side { fill: var(--pin-roof-side); }
 .site-pin .factory-chimney { fill: var(--pin-wall); stroke: var(--pin-wall-edge); stroke-width: 0.4; }
 .site-pin .factory-chimney-band { fill: var(--pin-roof); }
+.site-pin .factory-chimney-cap { fill: #ffffff; }
 .site-pin .factory-window { fill: var(--pin-window); }
 .site-pin .factory-door { fill: var(--pin-roof); }
-.site-pin .factory-smoke { fill: var(--pin-smoke); opacity: 0.8; }
+.site-pin .factory-smoke { fill: none; stroke: var(--pin-smoke); stroke-width: 1.1; stroke-linecap: round; opacity: 0.85; }
 .site-pin text {
   font-size: 13px; font-weight: 700; fill: var(--map-label-ink);
   paint-order: stroke; stroke: #ffffff; stroke-width: 3px; stroke-linejoin: round;

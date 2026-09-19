@@ -4,12 +4,16 @@
 const DATA_URL = "data/dashboard.json";
 const SITE_COLOR_VAR = { PCB: "--series-1", SKA: "--series-2", CNX: "--series-3" };
 // The map background is a real satellite photo (assets/map-satellite.webp, 1023x726px) shown
-// full-bleed across the panel. MAP_DEFAULT_VIEWBOX/MAP_BASE_VIEWBOX are both the whole photo
-// (there's no more image data beyond its edges to zoom out to); MAP_MIN_W is how far you can
-// zoom in. Pixel positions below were fitted from known landmarks visible in the photo
-// (Bangkok, Vientiane, Hanoi, Yangon, Ho Chi Minh City, Banda Aceh).
-const MAP_DEFAULT_VIEWBOX = { x: 0, y: 0, w: 1023, h: 726 };
-const MAP_BASE_VIEWBOX = { x: 0, y: 0, w: 1023, h: 726 };
+// full-bleed across the panel via preserveAspectRatio="slice". The panel is always wider than
+// the photo's own aspect ratio, so "slice" always crops off some of the top+bottom (never the
+// sides); height 700 (instead of the photo's full 726) keeps that crop comfortably clear of
+// both the northernmost (CNX) and southernmost (SKA) pins across the range of panel widths this
+// dashboard actually renders at, at the cost of a sliver of unremarkable sea at the very bottom
+// of the photo. MAP_MIN_W is how far you can zoom in. Pixel positions below were fitted from
+// known landmarks visible in the photo (Bangkok, Vientiane, Hanoi, Yangon, Ho Chi Minh City,
+// Banda Aceh).
+const MAP_DEFAULT_VIEWBOX = { x: 0, y: 0, w: 1023, h: 700 };
+const MAP_BASE_VIEWBOX = { x: 0, y: 0, w: 1023, h: 700 };
 const MAP_MIN_W = 140; // most zoomed-in: 1023/140 = ~7.3x
 // Site pin icons are drawn at a size tuned for a 300-unit-wide default viewBox; this keeps
 // them the same on-screen size now that the coordinate system is the photo's own pixel grid.
@@ -227,25 +231,27 @@ function renderMap() {
     pin.dataset.x = s.map_position.x;
     pin.dataset.y = s.map_position.y;
     pin.innerHTML = `
-      <ellipse class="pin-ground-shadow" cx="0" cy="2" rx="11" ry="3.5"></ellipse>
-      <circle class="pin-halo" cx="0" cy="-12" r="17"></circle>
-      <circle class="pin-pulse" cx="0" cy="0" r="6"></circle>
+      <ellipse class="pin-ground-shadow" cx="0.5" cy="1.5" rx="11" ry="3.2"></ellipse>
+      <circle class="pin-halo" cx="0.5" cy="-10" r="16"></circle>
+      <circle class="pin-pulse" cx="0.5" cy="0" r="6"></circle>
       <g filter="url(#pinDropShadow)">
-        <ellipse class="factory-smoke" cx="-7" cy="-40" rx="2.6" ry="2"></ellipse>
-        <ellipse class="factory-smoke" cx="-8.5" cy="-44.5" rx="2" ry="1.5"></ellipse>
-        <ellipse class="factory-smoke" cx="6.5" cy="-42" rx="2.6" ry="2"></ellipse>
-        <ellipse class="factory-smoke" cx="8" cy="-46.5" rx="2" ry="1.5"></ellipse>
-        <rect class="factory-chimney" x="-8.5" y="-34" width="3" height="9" rx="0.5"></rect>
-        <rect class="factory-chimney" x="5.5" y="-36" width="3" height="11" rx="0.5"></rect>
-        <rect class="factory-chimney-band" x="-8.5" y="-34" width="3" height="2.4"></rect>
-        <rect class="factory-chimney-band" x="5.5" y="-36" width="3" height="2.4"></rect>
-        <path class="factory-roof" d="M-13,-20 L13,-20 L10,-26.5 L-10,-26.5 Z"></path>
-        <rect class="factory-wall" x="-11" y="-20" width="22" height="20" rx="1.5"></rect>
-        <rect class="factory-wall-base" x="-11" y="-3.2" width="22" height="3.2"></rect>
-        <rect class="factory-window" x="-8" y="-16" width="3.4" height="3.4" rx="0.5"></rect>
-        <rect class="factory-window" x="-1.7" y="-16" width="3.4" height="3.4" rx="0.5"></rect>
-        <rect class="factory-window" x="4.6" y="-16" width="3.4" height="3.4" rx="0.5"></rect>
-        <rect class="factory-door" x="-3" y="-9" width="6" height="9" rx="1"></rect>
+        <path class="factory-smoke" d="M-4.1,-29 C-6.2,-32 -2,-33.5 -4,-37"></path>
+        <path class="factory-smoke" d="M-0.1,-31 C-2.2,-34.5 2,-35.5 0,-40"></path>
+        <path class="factory-base-side" d="M5,-3 L11,-6 L11,-3 L5,0 Z"></path>
+        <rect class="factory-base-front" x="-10" y="-3" width="15" height="3"></rect>
+        <path class="factory-wall-side" d="M5,-18 L11,-21 L11,-6 L5,-3 Z"></path>
+        <rect class="factory-wall-front" x="-10" y="-18" width="15" height="15" rx="0.6"></rect>
+        <rect class="factory-window" x="-8" y="-14" width="2.6" height="2.6" rx="0.4"></rect>
+        <rect class="factory-window" x="-4" y="-14" width="2.6" height="2.6" rx="0.4"></rect>
+        <rect class="factory-door" x="0.5" y="-9" width="3.6" height="6" rx="0.6"></rect>
+        <path class="factory-roof-side" d="M7,-18 L13,-21 L10,-27 L4,-24 Z"></path>
+        <path class="factory-roof-front" d="M-12,-18 L7,-18 L4,-24 L-9,-24 Z"></path>
+        <rect class="factory-chimney" x="-5.3" y="-29" width="2.4" height="6.5" rx="1"></rect>
+        <rect class="factory-chimney" x="-1.3" y="-31" width="2.4" height="8.5" rx="1"></rect>
+        <rect class="factory-chimney-band" x="-5.3" y="-29" width="2.4" height="1.8"></rect>
+        <rect class="factory-chimney-band" x="-1.3" y="-31" width="2.4" height="1.8"></rect>
+        <ellipse class="factory-chimney-cap" cx="-4.1" cy="-29" rx="1.5" ry="0.8"></ellipse>
+        <ellipse class="factory-chimney-cap" cx="-0.1" cy="-31" rx="1.5" ry="0.8"></ellipse>
       </g>
       <text x="20" y="-9">${s.name_th}</text>`;
     pin.addEventListener("click", (e) => {
