@@ -187,6 +187,20 @@ function renderAnomalyTable() {
   });
 }
 
+function renderSiteCostTable() {
+  const tbody = document.querySelector("#siteCostTable tbody");
+  tbody.innerHTML = "";
+  DATA.sites.forEach((s) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${s.name_th}</td>
+      <td>${s.days_on_hand} วัน</td>
+      <td>${fmtNum(s.electricity_cost_thb_per_ton)} / ${fmtNum(s.water_cost_thb_per_ton)}</td>
+      <td>${fmtNum(s.production_cost_thb_per_ton)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
 /* ---------------- Map ---------------- */
 let activePinId = null;
 function renderMap() {
@@ -230,7 +244,7 @@ function siteCardHTML(s) {
       <div class="metric-block">
         <div class="mb-label">สินค้าคงคลัง</div>
         <div class="mb-value">${fmtNum(s.inventory_ton)} <span style="font-size:11px;font-weight:400;">ตัน</span></div>
-        <div class="mb-sub">ใช้พื้นที่คลัง ${s.storage_utilization_pct}% · สำรอง (DOH) ${s.days_on_hand} วัน</div>
+        <div class="mb-sub">ใช้พื้นที่คลัง ${s.storage_utilization_pct}%</div>
       </div>
       <div class="metric-block">
         <div class="mb-label">กำลังไฟฟ้า</div>
@@ -241,15 +255,6 @@ function siteCardHTML(s) {
         <div class="mb-label">สุขภาพเครื่องจักร</div>
         <div class="mb-value">${s.asset_health_pct}%</div>
         <div class="mini-bar-track" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${s.asset_health_pct}%; background:${cssVar(SITE_COLOR_VAR[s.id])}"></div></div>
-      </div>
-      <div class="metric-block">
-        <div class="mb-label">ค่าไฟ / ค่าน้ำ ต่อตัน</div>
-        <div class="mb-value">${fmtNum(s.electricity_cost_thb_per_ton)} <span style="font-size:11px;font-weight:400;">฿</span></div>
-        <div class="mb-sub">ไฟฟ้า ${fmtNum(s.electricity_cost_thb_per_ton)} ฿ · น้ำ ${fmtNum(s.water_cost_thb_per_ton)} ฿</div>
-      </div>
-      <div class="metric-block" style="grid-column: 1 / -1;">
-        <div class="mb-label">ต้นทุนการผลิตเยื่อ 1 ตัน</div>
-        <div class="mb-value">${fmtNum(s.production_cost_thb_per_ton)} <span style="font-size:11px;font-weight:400;">฿/ตัน</span></div>
       </div>
     </div>
     <div class="site-card-foot">
@@ -468,6 +473,7 @@ function renderAll() {
   renderSiteMetricsTable();
   renderPowerMixChart();
   renderAnomalyTable();
+  renderSiteCostTable();
   renderMap();
   renderOrderExecution();
   renderPerformanceChart();
