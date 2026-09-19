@@ -3,12 +3,17 @@
 
 const DATA_URL = "data/dashboard.json";
 const SITE_COLOR_VAR = { PCB: "--series-1", SKA: "--series-2", CNX: "--series-3" };
-// The map is really a small region map (Thailand + its neighbors); MAP_DEFAULT_VIEWBOX is
-// the initial "focused on Thailand" crop, MAP_BASE_VIEWBOX is the full extent you can zoom
-// out to (it shares Thailand's exact coordinate system, so nothing about Thailand moves).
-const MAP_DEFAULT_VIEWBOX = { x: 0, y: 0, w: 300, h: 528 };
-const MAP_BASE_VIEWBOX = { x: -165, y: -290, w: 580, h: 1020 };
-const MAP_MIN_W = 40; // most zoomed-in: 300/40 = 7.5x
+// The map background is a real satellite photo (assets/map-satellite.webp, 1023x726px) shown
+// full-bleed across the panel. MAP_DEFAULT_VIEWBOX/MAP_BASE_VIEWBOX are both the whole photo
+// (there's no more image data beyond its edges to zoom out to); MAP_MIN_W is how far you can
+// zoom in. Pixel positions below were fitted from known landmarks visible in the photo
+// (Bangkok, Vientiane, Hanoi, Yangon, Ho Chi Minh City, Banda Aceh).
+const MAP_DEFAULT_VIEWBOX = { x: 0, y: 0, w: 1023, h: 726 };
+const MAP_BASE_VIEWBOX = { x: 0, y: 0, w: 1023, h: 726 };
+const MAP_MIN_W = 140; // most zoomed-in: 1023/140 = ~7.3x
+// Site pin icons are drawn at a size tuned for a 300-unit-wide default viewBox; this keeps
+// them the same on-screen size now that the coordinate system is the photo's own pixel grid.
+const PIN_BASE_SCALE = 300 / MAP_DEFAULT_VIEWBOX.w;
 let mapViewBox = { ...MAP_DEFAULT_VIEWBOX };
 
 let DATA = null;
@@ -314,7 +319,7 @@ function applyMapViewBox() {
     .setAttribute("viewBox", `${mapViewBox.x} ${mapViewBox.y} ${mapViewBox.w} ${mapViewBox.h}`);
   // Counter-scale pins so they stay a constant on-screen size relative to the default
   // (Thailand-focused) view, shrinking a bit as you zoom in past it, growing as you zoom out.
-  const pinScale = mapViewBox.w / MAP_DEFAULT_VIEWBOX.w;
+  const pinScale = (mapViewBox.w / MAP_DEFAULT_VIEWBOX.w) * PIN_BASE_SCALE;
   document.querySelectorAll(".site-pin").forEach((pin) => {
     pin.setAttribute("transform", `translate(${pin.dataset.x},${pin.dataset.y}) scale(${pinScale})`);
   });
