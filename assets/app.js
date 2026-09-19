@@ -3,6 +3,7 @@
 
 const DATA_URL = "data/dashboard.json";
 const SITE_COLOR_VAR = { PCB: "--series-1", SKA: "--series-2", CNX: "--series-3" };
+const MAP_VIEWBOX = { width: 300, height: 528 };
 
 let DATA = null;
 let chartInstances = [];
@@ -225,8 +226,8 @@ function showPopup(site) {
   });
   const wrap = document.getElementById("mapWrap");
   const wrapRect = wrap.getBoundingClientRect();
-  const px = (site.map_position.x / 300) * wrapRect.width;
-  const py = (site.map_position.y / 700) * wrapRect.height;
+  const px = (site.map_position.x / MAP_VIEWBOX.width) * wrapRect.width;
+  const py = (site.map_position.y / MAP_VIEWBOX.height) * wrapRect.height;
   const popup = document.getElementById("mapPopup");
   popup.style.left = px + "px";
   popup.style.top = py + "px";

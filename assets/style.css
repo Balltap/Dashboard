@@ -32,12 +32,17 @@
   --radius-md: 12px;
   --radius-sm: 8px;
 
-  --map-face-a: #dbe9fb;
-  --map-face-b: #7fb0ef;
-  --map-face-c: #2a78d6;
-  --map-side-a: #184f95;
-  --map-side-b: #0d366b;
-  --map-rim: rgba(255,255,255,0.55);
+  /* Map badge: a fixed-color decorative "globe" object, same in both themes */
+  --map-badge-a: #6fa8e8;
+  --map-badge-b: #2f66aa;
+  --map-badge-c: #123a72;
+  --map-face-a: #ffffff;
+  --map-face-b: #eef4fb;
+  --map-face-c: #c9def4;
+  --map-side-a: #a9c8ec;
+  --map-side-b: #6f97c9;
+  --map-rim: rgba(255,255,255,0.85);
+  --map-label-ink: #16233a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -60,13 +65,6 @@
     --series-5: #d55181;
 
     --success-text: #0ca30c;
-
-    --map-face-a: #3a5c8a;
-    --map-face-b: #2a5fa0;
-    --map-face-c: #3987e5;
-    --map-side-a: #16345c;
-    --map-side-b: #081729;
-    --map-rim: rgba(255,255,255,0.22);
   }
 }
 :root[data-theme="dark"] {
@@ -88,13 +86,6 @@
   --series-5: #d55181;
 
   --success-text: #0ca30c;
-
-  --map-face-a: #3a5c8a;
-  --map-face-b: #2a5fa0;
-  --map-face-c: #3987e5;
-  --map-side-a: #16345c;
-  --map-side-b: #081729;
-  --map-rim: rgba(255,255,255,0.22);
 }
 
 * { box-sizing: border-box; }
@@ -207,21 +198,22 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .map-wrap { position: relative; }
 .map-svg { width: 100%; height: auto; display: block; }
 
+.th-badge { fill: url(#mapBadgeGrad); }
 .th-side { fill: url(#mapSideGrad); }
 .th-rim { fill: var(--map-rim); }
 .th-face { fill: url(#mapFaceGrad); stroke: var(--map-side-b); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-.th-sheen { fill: url(#mapSheenGrad); opacity: 0.5; pointer-events: none; }
+.th-sheen { fill: url(#mapSheenGrad); opacity: 0.6; pointer-events: none; }
 
 .site-pin { cursor: pointer; }
 .site-pin .pin-pulse { fill: var(--series-1); opacity: 0.4; transform-box: fill-box; transform-origin: center; animation: pinPulse 2.6s ease-out infinite; }
-.site-pin .pin-ground-shadow { fill: rgba(11,11,11,0.32); }
+.site-pin .pin-ground-shadow { fill: rgba(11,11,11,0.28); }
 .site-pin .pin-body { fill: var(--series-1); }
 .site-pin.active .pin-body { fill: var(--series-2); }
-.site-pin .pin-hole { fill: var(--surface-1); }
+.site-pin .pin-hole { fill: #ffffff; }
 .site-pin .pin-highlight { fill: #ffffff; opacity: 0.5; pointer-events: none; }
 .site-pin text {
-  font-size: 13px; font-weight: 700; fill: var(--text-primary);
-  paint-order: stroke; stroke: var(--surface-1); stroke-width: 3px; stroke-linejoin: round;
+  font-size: 13px; font-weight: 700; fill: var(--map-label-ink);
+  paint-order: stroke; stroke: #ffffff; stroke-width: 3px; stroke-linejoin: round;
 }
 
 @keyframes pinPulse {
