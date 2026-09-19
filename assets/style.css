@@ -257,8 +257,41 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  cursor: grab;
+  touch-action: none;
 }
+.map-wrap.dragging { cursor: grabbing; }
 .map-svg { height: 100%; width: auto; max-width: 100%; display: block; }
+
+.map-zoom-controls {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 4;
+}
+.map-zoom-controls button {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+.map-zoom-controls button:hover { background: var(--page-plane); }
+.map-zoom-controls button:disabled { opacity: 0.35; cursor: default; }
+.map-zoom-controls button svg { pointer-events: none; }
 
 .th-badge { fill: url(#mapBadgeGrad); }
 .th-side { fill: url(#mapSideGrad); }

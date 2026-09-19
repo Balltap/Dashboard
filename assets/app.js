@@ -3,7 +3,9 @@
 
 const DATA_URL = "data/dashboard.json";
 const SITE_COLOR_VAR = { PCB: "--series-1", SKA: "--series-2", CNX: "--series-3" };
-const MAP_VIEWBOX = { width: 300, height: 528 };
+const MAP_BASE_VIEWBOX = { x: 0, y: 0, w: 300, h: 528 };
+const MAP_MIN_W = 40; // most zoomed-in: 300/40 = 7.5x
+let mapViewBox = { ...MAP_BASE_VIEWBOX };
 
 let DATA = null;
 let chartInstances = [];
@@ -213,6 +215,8 @@ function renderMap() {
     pin.setAttribute("class", "site-pin");
     pin.setAttribute("transform", `translate(${s.map_position.x}, ${s.map_position.y})`);
     pin.setAttribute("data-site-id", s.id);
+    pin.dataset.x = s.map_position.x;
+    pin.dataset.y = s.map_position.y;
     pin.innerHTML = `
       <ellipse class="pin-ground-shadow" cx="0" cy="3" rx="10" ry="3.5"></ellipse>
       <circle class="pin-pulse" cx="0" cy="0" r="6"></circle>
@@ -270,18 +274,158 @@ function showPopup(site) {
     p.classList.toggle("active", p.getAttribute("data-site-id") === site.id);
   });
   const svgRect = document.getElementById("thailandMap").getBoundingClientRect();
-  const px = svgRect.left + (site.map_position.x / MAP_VIEWBOX.width) * svgRect.width;
-  const py = svgRect.top + (site.map_position.y / MAP_VIEWBOX.height) * svgRect.height;
+  const px = svgRect.left + ((site.map_position.x - mapViewBox.x) / mapViewBox.w) * svgRect.width;
+  const py = svgRect.top + ((site.map_position.y - mapViewBox.y) / mapViewBox.h) * svgRect.height;
   const popup = document.getElementById("mapPopup");
   popup.style.left = px + "px";
   popup.style.top = py + "px";
   popup.style.display = "block";
   popup.innerHTML = siteCardHTML(site);
 }
-document.addEventListener("click", () => {
+function closePopup() {
+  activePinId = null;
   document.getElementById("mapPopup").style.display = "none";
   document.querySelectorAll(".site-pin").forEach((p) => p.classList.remove("active"));
-});
+}
+document.addEventListener("click", closePopup);
+
+/* ---------------- Map zoom / pan ---------------- */
+function applyMapViewBox() {
+  document
+    .getElementById("thailandMap")
+    .setAttribute("viewBox", `${mapViewBox.x} ${mapViewBox.y} ${mapViewBox.w} ${mapViewBox.h}`);
+  // Counter-scale pins so they stay a constant on-screen size as the map zooms in/out.
+  const pinScale = mapViewBox.w / MAP_BASE_VIEWBOX.w;
+  document.querySelectorAll(".site-pin").forEach((pin) => {
+    pin.setAttribute("transform", `translate(${pin.dataset.x},${pin.dataset.y}) scale(${pinScale})`);
+  });
+}
+function clampMapViewBox(vb) {
+  vb.w = Math.max(MAP_MIN_W, Math.min(MAP_BASE_VIEWBOX.w, vb.w));
+  vb.h = vb.w * (MAP_BASE_VIEWBOX.h / MAP_BASE_VIEWBOX.w);
+  vb.x = Math.max(0, Math.min(MAP_BASE_VIEWBOX.w - vb.w, vb.x));
+  vb.y = Math.max(0, Math.min(MAP_BASE_VIEWBOX.h - vb.h, vb.y));
+  return vb;
+}
+function updateZoomButtonsState() {
+  const atBase = mapViewBox.w >= MAP_BASE_VIEWBOX.w - 0.01;
+  const zoomOutBtn = document.getElementById("mapZoomOut");
+  const resetBtn = document.getElementById("mapZoomReset");
+  if (zoomOutBtn) zoomOutBtn.disabled = atBase;
+  if (resetBtn) resetBtn.disabled = atBase;
+}
+function zoomMapAt(clientX, clientY, factor) {
+  const svg = document.getElementById("thailandMap");
+  const rect = svg.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  const relX = (clientX - rect.left) / rect.width;
+  const relY = (clientY - rect.top) / rect.height;
+  const svgX = mapViewBox.x + relX * mapViewBox.w;
+  const svgY = mapViewBox.y + relY * mapViewBox.h;
+  const newW = mapViewBox.w / factor;
+  const newH = newW * (MAP_BASE_VIEWBOX.h / MAP_BASE_VIEWBOX.w);
+  mapViewBox = clampMapViewBox({ x: svgX - relX * newW, y: svgY - relY * newH, w: newW, h: newH });
+  applyMapViewBox();
+  updateZoomButtonsState();
+}
+function resetMapView() {
+  mapViewBox = { ...MAP_BASE_VIEWBOX };
+  applyMapViewBox();
+  updateZoomButtonsState();
+}
+function initMapZoomPan() {
+  const wrap = document.getElementById("mapWrap");
+  const svg = document.getElementById("thailandMap");
+  const pointers = new Map();
+  let dragging = false;
+  let lastClient = null;
+  let pinchStartDist = null;
+  let pinchStartViewBox = null;
+
+  wrap.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      closePopup();
+      const factor = Math.exp(-e.deltaY * 0.0015);
+      zoomMapAt(e.clientX, e.clientY, factor);
+    },
+    { passive: false }
+  );
+
+  wrap.addEventListener("pointerdown", (e) => {
+    if (e.target.closest(".site-pin") || e.target.closest(".map-zoom-controls")) return; // let pin/button clicks fire normally
+    wrap.setPointerCapture(e.pointerId);
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 1) {
+      dragging = true;
+      lastClient = { x: e.clientX, y: e.clientY };
+      wrap.classList.add("dragging");
+    } else if (pointers.size === 2) {
+      dragging = false;
+      const pts = Array.from(pointers.values());
+      pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      pinchStartViewBox = { ...mapViewBox };
+    }
+  });
+
+  wrap.addEventListener("pointermove", (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      const pts = Array.from(pointers.values());
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      if (pinchStartDist && pinchStartViewBox) {
+        mapViewBox = { ...pinchStartViewBox };
+        const midX = (pts[0].x + pts[1].x) / 2;
+        const midY = (pts[0].y + pts[1].y) / 2;
+        zoomMapAt(midX, midY, dist / pinchStartDist);
+      }
+      return;
+    }
+    if (dragging && lastClient) {
+      const rect = svg.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const dxSvg = ((e.clientX - lastClient.x) / rect.width) * mapViewBox.w;
+      const dySvg = ((e.clientY - lastClient.y) / rect.height) * mapViewBox.h;
+      mapViewBox = clampMapViewBox({ ...mapViewBox, x: mapViewBox.x - dxSvg, y: mapViewBox.y - dySvg });
+      applyMapViewBox();
+      lastClient = { x: e.clientX, y: e.clientY };
+    }
+  });
+
+  function endPointer(e) {
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) pinchStartDist = null;
+    if (pointers.size === 1) {
+      dragging = true;
+      lastClient = Array.from(pointers.values())[0];
+    } else if (pointers.size === 0) {
+      dragging = false;
+      wrap.classList.remove("dragging");
+    }
+  }
+  wrap.addEventListener("pointerup", endPointer);
+  wrap.addEventListener("pointercancel", endPointer);
+
+  document.getElementById("mapZoomIn").addEventListener("click", (e) => {
+    e.stopPropagation();
+    const rect = svg.getBoundingClientRect();
+    zoomMapAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 1.5);
+  });
+  document.getElementById("mapZoomOut").addEventListener("click", (e) => {
+    e.stopPropagation();
+    const rect = svg.getBoundingClientRect();
+    zoomMapAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 1 / 1.5);
+  });
+  document.getElementById("mapZoomReset").addEventListener("click", (e) => {
+    e.stopPropagation();
+    closePopup();
+    resetMapView();
+  });
+
+  updateZoomButtonsState();
+}
 
 /* ---------------- Order execution ---------------- */
 function renderOrderExecution() {
@@ -518,6 +662,7 @@ fetch(DATA_URL, { cache: "no-store" })
     DATA = json;
     try {
       renderAll();
+      initMapZoomPan();
     } catch (err) {
       document.body.innerHTML =
         '<p style="padding:40px;font-family:sans-serif;">เกิดข้อผิดพลาดขณะแสดงผลแดชบอร์ด: ' + err + "</p>";
