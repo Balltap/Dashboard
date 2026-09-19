@@ -3,9 +3,13 @@
 
 const DATA_URL = "data/dashboard.json";
 const SITE_COLOR_VAR = { PCB: "--series-1", SKA: "--series-2", CNX: "--series-3" };
-const MAP_BASE_VIEWBOX = { x: 0, y: 0, w: 300, h: 528 };
+// The map is really a small region map (Thailand + its neighbors); MAP_DEFAULT_VIEWBOX is
+// the initial "focused on Thailand" crop, MAP_BASE_VIEWBOX is the full extent you can zoom
+// out to (it shares Thailand's exact coordinate system, so nothing about Thailand moves).
+const MAP_DEFAULT_VIEWBOX = { x: 0, y: 0, w: 300, h: 528 };
+const MAP_BASE_VIEWBOX = { x: -165, y: -290, w: 580, h: 1020 };
 const MAP_MIN_W = 40; // most zoomed-in: 300/40 = 7.5x
-let mapViewBox = { ...MAP_BASE_VIEWBOX };
+let mapViewBox = { ...MAP_DEFAULT_VIEWBOX };
 
 let DATA = null;
 let chartInstances = [];
@@ -308,8 +312,9 @@ function applyMapViewBox() {
   document
     .getElementById("thailandMap")
     .setAttribute("viewBox", `${mapViewBox.x} ${mapViewBox.y} ${mapViewBox.w} ${mapViewBox.h}`);
-  // Counter-scale pins so they stay a constant on-screen size as the map zooms in/out.
-  const pinScale = mapViewBox.w / MAP_BASE_VIEWBOX.w;
+  // Counter-scale pins so they stay a constant on-screen size relative to the default
+  // (Thailand-focused) view, shrinking a bit as you zoom in past it, growing as you zoom out.
+  const pinScale = mapViewBox.w / MAP_DEFAULT_VIEWBOX.w;
   document.querySelectorAll(".site-pin").forEach((pin) => {
     pin.setAttribute("transform", `translate(${pin.dataset.x},${pin.dataset.y}) scale(${pinScale})`);
   });
@@ -317,16 +322,20 @@ function applyMapViewBox() {
 function clampMapViewBox(vb) {
   vb.w = Math.max(MAP_MIN_W, Math.min(MAP_BASE_VIEWBOX.w, vb.w));
   vb.h = vb.w * (MAP_BASE_VIEWBOX.h / MAP_BASE_VIEWBOX.w);
-  vb.x = Math.max(0, Math.min(MAP_BASE_VIEWBOX.w - vb.w, vb.x));
-  vb.y = Math.max(0, Math.min(MAP_BASE_VIEWBOX.h - vb.h, vb.y));
+  vb.x = Math.max(MAP_BASE_VIEWBOX.x, Math.min(MAP_BASE_VIEWBOX.x + MAP_BASE_VIEWBOX.w - vb.w, vb.x));
+  vb.y = Math.max(MAP_BASE_VIEWBOX.y, Math.min(MAP_BASE_VIEWBOX.y + MAP_BASE_VIEWBOX.h - vb.h, vb.y));
   return vb;
 }
 function updateZoomButtonsState() {
-  const atBase = mapViewBox.w >= MAP_BASE_VIEWBOX.w - 0.01;
+  const atMaxZoomOut = mapViewBox.w >= MAP_BASE_VIEWBOX.w - 0.01;
+  const atDefault =
+    Math.abs(mapViewBox.w - MAP_DEFAULT_VIEWBOX.w) < 0.5 &&
+    Math.abs(mapViewBox.x - MAP_DEFAULT_VIEWBOX.x) < 0.5 &&
+    Math.abs(mapViewBox.y - MAP_DEFAULT_VIEWBOX.y) < 0.5;
   const zoomOutBtn = document.getElementById("mapZoomOut");
   const resetBtn = document.getElementById("mapZoomReset");
-  if (zoomOutBtn) zoomOutBtn.disabled = atBase;
-  if (resetBtn) resetBtn.disabled = atBase;
+  if (zoomOutBtn) zoomOutBtn.disabled = atMaxZoomOut;
+  if (resetBtn) resetBtn.disabled = atDefault;
 }
 function zoomMapAt(clientX, clientY, factor) {
   const svg = document.getElementById("thailandMap");
@@ -343,7 +352,7 @@ function zoomMapAt(clientX, clientY, factor) {
   updateZoomButtonsState();
 }
 function resetMapView() {
-  mapViewBox = { ...MAP_BASE_VIEWBOX };
+  mapViewBox = { ...MAP_DEFAULT_VIEWBOX };
   applyMapViewBox();
   updateZoomButtonsState();
 }
