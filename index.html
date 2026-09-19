@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=2" />
+<link rel="stylesheet" href="assets/style.css?v=3" />
 <script src="assets/chart.umd.js"></script>
 </head>
 <body>
@@ -29,13 +29,13 @@
   <div class="panel kpi-tile">
     <div class="kpi-label">รายได้รวม (Total Gross Revenue)</div>
     <div class="kpi-value" id="kpiRevenueValue">-</div>
-    <div class="chart-canvas-box" style="height:70px;"><canvas id="revenueSparkline"></canvas></div>
+    <div class="chart-canvas-box short"><canvas id="revenueSparkline"></canvas></div>
   </div>
 
   <div class="panel kpi-tile">
     <div class="kpi-label">อัตรากำไรขั้นต้น (Gross Profit Margin)</div>
     <div class="gauge-wrap">
-      <svg id="marginGauge" width="150" height="90" viewBox="0 0 150 90"></svg>
+      <svg id="marginGauge" width="112" height="67" viewBox="0 0 150 90"></svg>
       <div class="gauge-value" id="marginGaugeValue">-</div>
       <div class="gauge-caption"><span id="marginCaptionLeft">เป้าหมาย -</span><span id="marginCaptionRight">คงเหลือ -</span></div>
     </div>
@@ -74,20 +74,20 @@
   </div>
 </section>
 
-<!-- Overview: left charts / map / site cards -->
-<section class="overview-grid">
+<!-- Main: left rail / map center / right rail -->
+<section class="main-grid">
 
-  <div class="col">
-    <div class="panel">
+  <div class="rail">
+    <div class="panel auto-h">
       <div class="panel-title">กำลังผลิตเยื่อไผ่รวม <span class="tag" id="periodTagA">24 ชม.ล่าสุด</span></div>
       <div id="totalProdMeterWrap">
-        <div class="kpi-value" id="totalProdValue" style="font-size:22px;">-</div>
-        <div class="mini-bar-track" style="height:8px;"><div class="mini-bar-fill" id="totalProdBar" style="width:0%"></div></div>
+        <div class="kpi-value" id="totalProdValue" style="font-size:16px;">-</div>
+        <div class="mini-bar-track" style="height:5px;"><div class="mini-bar-fill" id="totalProdBar" style="width:0%"></div></div>
         <div class="kpi-sub" id="totalProdCaption">- / - ตัน/วัน (กำลังการผลิตรวม)</div>
       </div>
     </div>
 
-    <div class="panel">
+    <div class="panel auto-h">
       <div class="panel-title">สรุปตัวชี้วัดรายโรงงาน <span class="tag">เฉลี่ย/รวม</span></div>
       <table class="site-table" id="siteMetricsTable">
         <thead>
@@ -100,20 +100,35 @@
     <div class="panel">
       <div class="panel-title">สัดส่วนแหล่งพลังงาน (MW) <span class="tag">รายโรงงาน</span></div>
       <div class="chart-canvas-box"><canvas id="powerMixChart"></canvas></div>
+      <div class="legend-row">
+        <span><i style="background:var(--series-1)"></i> โซลาร์</span>
+        <span><i style="background:var(--series-2)"></i> ชีวมวล</span>
+        <span><i style="background:var(--series-3)"></i> สายส่งไฟฟ้า</span>
+      </div>
     </div>
 
-    <div class="panel">
+    <div class="panel auto-h">
       <div class="panel-title">รายการความผิดปกติของเครื่องจักร <span class="tag">24 ชม.ล่าสุด</span></div>
       <table class="site-table" id="anomalyTable">
         <thead>
-          <tr><th>โรงงาน</th><th>หม้อต้ม</th><th>เครื่องล้าง</th><th>ฟอกขาว</th><th>อบแห้ง</th><th>อัดม้วน</th></tr>
+          <tr><th>โรงงาน</th><th>ต้ม</th><th>ล้าง</th><th>ฟอก</th><th>อบ</th><th>อัด</th></tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
+
+    <div class="panel auto-h">
+      <div class="panel-title">การดำเนินการคำสั่งซื้อ <span class="tag">Order Execution</span></div>
+      <div class="order-list" id="orderExecutionList"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">ต้นทุนของเสีย/เศษวัสดุ <span class="tag">ต่อเดือน</span></div>
+      <div class="chart-canvas-box"><canvas id="wasteChart"></canvas></div>
+    </div>
   </div>
 
-  <div class="col">
+  <div class="map-center">
     <div class="panel">
       <div class="panel-title">แผนที่โรงงานในประเทศไทย <span class="tag">3 จังหวัด</span></div>
       <div class="map-wrap" id="mapWrap">
@@ -162,8 +177,8 @@
     </div>
   </div>
 
-  <div class="col">
-    <div class="panel">
+  <div class="rail">
+    <div class="panel auto-h">
       <div class="panel-title">ต้นทุน &amp; วันสำรองคลังรายโรงงาน <span class="tag">บาท/ตัน</span></div>
       <table class="site-table" id="siteCostTable">
         <thead>
@@ -172,61 +187,42 @@
         <tbody></tbody>
       </table>
     </div>
-  </div>
 
-</section>
-
-<!-- Charts grid -->
-<section class="charts-grid">
-
-  <div class="panel wide">
-    <div class="panel-title">การดำเนินการคำสั่งซื้อ (Order Execution) <span class="tag">งานหลักที่กำลังทำ</span></div>
-    <div class="order-list" id="orderExecutionList"></div>
-  </div>
-
-  <div class="panel wide">
-    <div class="panel-title">ภาพรวมผลการดำเนินงาน <span class="tag">ผลผลิต vs แผนส่งมอบ (ตัน)</span></div>
-    <div class="chart-canvas-box"><canvas id="performanceChart"></canvas></div>
-    <div class="legend-row">
-      <span><i style="background:var(--series-1)"></i> ผลผลิตจริง</span>
-      <span><i style="background:var(--series-2)"></i> แผนส่งมอบ</span>
+    <div class="panel">
+      <div class="panel-title">ภาพรวมผลการดำเนินงาน <span class="tag">ผลผลิต vs แผน (ตัน)</span></div>
+      <div class="chart-canvas-box"><canvas id="performanceChart"></canvas></div>
+      <div class="legend-row">
+        <span><i style="background:var(--series-1)"></i> ผลผลิตจริง</span>
+        <span><i style="background:var(--series-2)"></i> แผนส่งมอบ</span>
+      </div>
     </div>
-  </div>
 
-  <div class="panel wide">
-    <div class="panel-title">มูลค่าสินค้าคงคลัง (Inventory Value & DOH) <span class="tag">บาท / วันสำรอง</span></div>
-    <div class="chart-canvas-box"><canvas id="inventoryChart"></canvas></div>
-  </div>
-
-  <div class="panel wide">
-    <div class="panel-title">ต้นทุนของเสีย/เศษวัสดุ (Waste & Scrap Cost) <span class="tag">ต่อเดือน</span></div>
-    <div class="chart-canvas-box"><canvas id="wasteChart"></canvas></div>
-  </div>
-
-  <div class="panel wide">
-    <div class="panel-title">ต้นทุนพลังงานสุทธิต่อตัน (Net Energy Cost / Ton) <span class="tag">บาท/ตัน</span></div>
-    <div class="chart-canvas-box"><canvas id="energyCostChart"></canvas></div>
-    <div class="legend-row">
-      <span><i style="background:var(--series-1)"></i> ไฟฟ้า</span>
-      <span><i style="background:var(--series-2)"></i> ไอน้ำ</span>
+    <div class="panel">
+      <div class="panel-title">มูลค่าสินค้าคงคลัง <span class="tag">บาท / วันสำรอง</span></div>
+      <div class="chart-canvas-box"><canvas id="inventoryChart"></canvas></div>
     </div>
-  </div>
 
-  <div class="panel wide">
-    <div class="panel-title">ต้นทุนต่อตัน (Unit Costs / Ton) <span class="tag">วัตถุดิบ & ค่าโสหุ้ย</span></div>
-    <div class="chart-canvas-box"><canvas id="unitCostChart"></canvas></div>
-    <div class="legend-row">
-      <span><i style="background:var(--series-1)"></i> วัตถุดิบ</span>
-      <span><i style="background:var(--series-2)"></i> ค่าโสหุ้ยคงที่</span>
+    <div class="panel">
+      <div class="panel-title">ต้นทุนพลังงานสุทธิต่อตัน <span class="tag">บาท/ตัน</span></div>
+      <div class="chart-canvas-box"><canvas id="energyCostChart"></canvas></div>
+      <div class="legend-row">
+        <span><i style="background:var(--series-1)"></i> ไฟฟ้า</span>
+        <span><i style="background:var(--series-2)"></i> ไอน้ำ</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">ต้นทุนต่อตัน <span class="tag">วัตถุดิบ &amp; ค่าโสหุ้ย</span></div>
+      <div class="chart-canvas-box"><canvas id="unitCostChart"></canvas></div>
+      <div class="legend-row">
+        <span><i style="background:var(--series-1)"></i> วัตถุดิบ</span>
+        <span><i style="background:var(--series-2)"></i> ค่าโสหุ้ยคงที่</span>
+      </div>
     </div>
   </div>
 
 </section>
 
-<footer class="dash-footer">
-  ข้อมูลทั้งหมดอ่านจาก <code>data/dashboard.json</code> — แก้ไขไฟล์นี้เพื่ออัปเดตแดชบอร์ด ไม่ต้องแก้โค้ด
-</footer>
-
-<script src="assets/app.js?v=2"></script>
+<script src="assets/app.js?v=3"></script>
 </body>
 </html>

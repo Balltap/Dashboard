@@ -160,10 +160,11 @@ function renderPowerMixChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { position: "bottom", labels: { color: cssVar("--text-secondary"), boxWidth: 10, font: { size: 10 } } } },
+        layout: { padding: 0 },
+        plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 10 } } },
-          y: { title: { display: true, text: "MW", color: cssVar("--text-muted") }, grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted") } },
+          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 9 } } },
+          y: { grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), font: { size: 9 }, maxTicksLimit: 3 } },
         },
       },
     })
@@ -268,10 +269,9 @@ function showPopup(site) {
   document.querySelectorAll(".site-pin").forEach((p) => {
     p.classList.toggle("active", p.getAttribute("data-site-id") === site.id);
   });
-  const wrap = document.getElementById("mapWrap");
-  const wrapRect = wrap.getBoundingClientRect();
-  const px = (site.map_position.x / MAP_VIEWBOX.width) * wrapRect.width;
-  const py = (site.map_position.y / MAP_VIEWBOX.height) * wrapRect.height;
+  const svgRect = document.getElementById("thailandMap").getBoundingClientRect();
+  const px = svgRect.left + (site.map_position.x / MAP_VIEWBOX.width) * svgRect.width;
+  const py = svgRect.top + (site.map_position.y / MAP_VIEWBOX.height) * svgRect.height;
   const popup = document.getElementById("mapPopup");
   popup.style.left = px + "px";
   popup.style.top = py + "px";
@@ -319,10 +319,11 @@ function renderPerformanceChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: 0 },
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted") } },
-          y: { title: { display: true, text: "ตัน", color: cssVar("--text-muted") }, grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted") } },
+          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 9 } } },
+          y: { grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), font: { size: 9 }, maxTicksLimit: 4 } },
         },
       },
     })
@@ -341,6 +342,7 @@ function renderInventoryChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: 0 },
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -353,8 +355,8 @@ function renderInventoryChart() {
           },
         },
         scales: {
-          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted") } },
-          y: { title: { display: true, text: "บาท", color: cssVar("--text-muted") }, grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), callback: (v) => (v / 1e6).toFixed(0) + "M" } },
+          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 9 } } },
+          y: { grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), font: { size: 9 }, maxTicksLimit: 4, callback: (v) => (v / 1e6).toFixed(0) + "M" } },
         },
       },
     })
@@ -383,7 +385,8 @@ function renderWasteChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { position: "bottom", labels: { color: cssVar("--text-secondary"), boxWidth: 10, font: { size: 10 } } } },
+        layout: { padding: 0 },
+        plugins: { legend: { display: false } },
         cutout: "62%",
       },
       plugins: [
@@ -395,7 +398,7 @@ function renderWasteChart() {
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillStyle = cssVar("--text-primary");
-            ctx.font = "700 16px system-ui, sans-serif";
+            ctx.font = "700 11px system-ui, sans-serif";
             const cx = (chartArea.left + chartArea.right) / 2;
             const cy = (chartArea.top + chartArea.bottom) / 2;
             ctx.fillText(fmtTHB(w.total_thb), cx, cy);
@@ -405,6 +408,18 @@ function renderWasteChart() {
       ],
     })
   );
+  const panel = document.getElementById("wasteChart").closest(".panel");
+  let legend = panel.querySelector("#wasteLegend");
+  if (!legend) {
+    legend = document.createElement("div");
+    legend.id = "wasteLegend";
+    legend.className = "legend-row";
+    panel.appendChild(legend);
+  }
+  const wasteColors = [cssVar("--series-1"), cssVar("--series-2"), cssVar("--series-3")];
+  legend.innerHTML = w.categories_th
+    .map((c, i) => `<span><i style="background:${wasteColors[i]}"></i>${c}</span>`)
+    .join("");
 }
 
 function renderEnergyCostChart() {
@@ -423,10 +438,11 @@ function renderEnergyCostChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: 0 },
         plugins: { legend: { display: false } },
         scales: {
-          x: { stacked: true, grid: { display: false }, ticks: { color: cssVar("--text-muted") } },
-          y: { stacked: true, title: { display: true, text: "บาท/ตัน", color: cssVar("--text-muted") }, grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted") } },
+          x: { stacked: true, grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 9 } } },
+          y: { stacked: true, grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), font: { size: 9 }, maxTicksLimit: 4 } },
         },
       },
     })
@@ -449,10 +465,11 @@ function renderUnitCostChart() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: 0 },
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted") } },
-          y: { title: { display: true, text: "บาท/ตัน", color: cssVar("--text-muted") }, grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted") } },
+          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 9 } } },
+          y: { grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), font: { size: 9 }, maxTicksLimit: 4 } },
         },
       },
     })
