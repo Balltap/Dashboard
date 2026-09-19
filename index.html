@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>แดชบอร์ดผู้บริหาร - โรงงานเยื่อไผ่</title>
+<meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css" />
+<script src="assets/chart.umd.js"></script>
+</head>
+<body>
+
+<header class="dash-header">
+  <div>
+    <h1 id="dashTitle">แดชบอร์ดผู้บริหาร - โรงงานเยื่อไผ่</h1>
+    <p class="subtitle" id="dashCompany">บริษัท ไทยเยื่อไผ่ จำกัด · 3 โรงงาน: เพชรบูรณ์ · สงขลา · เชียงใหม่</p>
+  </div>
+  <div class="meta-right">
+    <div id="lastUpdated">อัปเดตล่าสุด: -</div>
+    <div id="periodLabel">ช่วงข้อมูล: -</div>
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<!-- KPI summary row -->
+<section class="kpi-row">
+  <div class="panel kpi-tile">
+    <div class="kpi-label">รายได้รวม (Total Gross Revenue)</div>
+    <div class="kpi-value" id="kpiRevenueValue">-</div>
+    <div class="chart-canvas-box" style="height:70px;"><canvas id="revenueSparkline"></canvas></div>
+  </div>
+
+  <div class="panel kpi-tile">
+    <div class="kpi-label">อัตรากำไรขั้นต้น (Gross Profit Margin)</div>
+    <div class="gauge-wrap">
+      <svg id="marginGauge" width="150" height="90" viewBox="0 0 150 90"></svg>
+      <div class="gauge-value" id="marginGaugeValue">-</div>
+      <div class="gauge-caption"><span id="marginCaptionLeft">เป้าหมาย -</span><span id="marginCaptionRight">คงเหลือ -</span></div>
+    </div>
+  </div>
+
+  <div class="panel kpi-tile">
+    <div class="kpi-label">การส่งมอบตรงเวลา ครบถ้วน (OTIF)</div>
+    <div class="gauge-wrap">
+      <svg id="otifGauge" width="150" height="90" viewBox="0 0 150 90"></svg>
+      <div class="gauge-value" id="otifGaugeValue">-</div>
+      <div class="gauge-caption"><span>&lt;90% แดง</span><span>&gt;95% เขียว</span></div>
+    </div>
+  </div>
+
+  <div class="panel kpi-tile">
+    <div class="kpi-label">ความเสี่ยงการส่งมอบ (Delivery Risk Score)</div>
+    <div class="risk-matrix">
+      <div class="risk-cell low">ต่ำ</div><div class="risk-cell med">กลาง</div><div class="risk-cell high">สูง</div>
+      <div class="risk-cell low dim">ต่ำ</div><div class="risk-cell med dim">กลาง</div><div class="risk-cell high dim">สูง</div>
+    </div>
+    <div class="risk-score-row">
+      <span class="score" id="riskScoreValue">-</span>
+      <span class="level" id="riskLevelValue">-</span>
+    </div>
+    <div class="kpi-sub" id="riskOrdersAtRisk">คำสั่งซื้อที่มีความเสี่ยง: -</div>
+  </div>
+</section>
+
+<!-- Overview: left charts / map / site cards -->
+<section class="overview-grid">
+
+  <div class="col">
+    <div class="panel">
+      <div class="panel-title">กำลังผลิตเยื่อไผ่รวม <span class="tag" id="periodTagA">24 ชม.ล่าสุด</span></div>
+      <div id="totalProdMeterWrap">
+        <div class="kpi-value" id="totalProdValue" style="font-size:22px;">-</div>
+        <div class="mini-bar-track" style="height:8px;"><div class="mini-bar-fill" id="totalProdBar" style="width:0%"></div></div>
+        <div class="kpi-sub" id="totalProdCaption">- / - ตัน/วัน (กำลังการผลิตรวม)</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">สรุปตัวชี้วัดรายโรงงาน <span class="tag">เฉลี่ย/รวม</span></div>
+      <table class="site-table" id="siteMetricsTable">
+        <thead>
+          <tr><th>โรงงาน</th><th>ผลผลิต</th><th>สต็อก</th><th>ตอบสนองดีมานด์</th><th>ใช้พื้นที่คลัง</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">สัดส่วนแหล่งพลังงาน (MW) <span class="tag">รายโรงงาน</span></div>
+      <div class="chart-canvas-box"><canvas id="powerMixChart"></canvas></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">รายการความผิดปกติของเครื่องจักร <span class="tag">24 ชม.ล่าสุด</span></div>
+      <table class="site-table" id="anomalyTable">
+        <thead>
+          <tr><th>โรงงาน</th><th>หม้อต้ม</th><th>เครื่องล้าง</th><th>ฟอกขาว</th><th>อบแห้ง</th><th>อัดม้วน</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="panel">
+      <div class="panel-title">แผนที่โรงงานในประเทศไทย <span class="tag">3 จังหวัด</span></div>
+      <div class="map-wrap" id="mapWrap">
+        <svg class="map-svg" id="thailandMap" viewBox="0 0 300 700" xmlns="http://www.w3.org/2000/svg">
+          <path class="th-outline" d="M100,20 L140,10 L170,40 L190,70 L230,90 L270,110 L290,160 L280,210 L250,230 L220,250 L200,270 L190,300 L170,320 L185,340 L200,370 L195,420 L190,470 L185,520 L180,570 L175,610 L170,650 L160,670 L150,650 L140,600 L135,550 L130,500 L125,450 L120,400 L115,350 L110,320 L100,280 L90,240 L80,200 L75,150 L80,100 L90,60 Z" />
+          <g id="mapPins"></g>
+        </svg>
+        <div class="map-popup" id="mapPopup" style="display:none;"></div>
+      </div>
+      <div class="map-legend">
+        <span><i style="background:var(--series-1)"></i> โรงงานออนไลน์</span>
+        <span>แผนที่แสดงตำแหน่งโดยสังเขป ไม่ใช่มาตราส่วนทางภูมิศาสตร์ที่แม่นยำ</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" id="siteCardsCol">
+    <!-- site cards injected by JS -->
+  </div>
+
+</section>
+
+<!-- Charts grid -->
+<section class="charts-grid">
+
+  <div class="panel wide">
+    <div class="panel-title">การดำเนินการคำสั่งซื้อ (Order Execution) <span class="tag">งานหลักที่กำลังทำ</span></div>
+    <div class="order-list" id="orderExecutionList"></div>
+  </div>
+
+  <div class="panel wide">
+    <div class="panel-title">ภาพรวมผลการดำเนินงาน <span class="tag">ผลผลิต vs แผนส่งมอบ (ตัน)</span></div>
+    <div class="chart-canvas-box"><canvas id="performanceChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--series-1)"></i> ผลผลิตจริง</span>
+      <span><i style="background:var(--series-2)"></i> แผนส่งมอบ</span>
+    </div>
+  </div>
+
+  <div class="panel wide">
+    <div class="panel-title">มูลค่าสินค้าคงคลัง (Inventory Value & DOH) <span class="tag">บาท / วันสำรอง</span></div>
+    <div class="chart-canvas-box"><canvas id="inventoryChart"></canvas></div>
+  </div>
+
+  <div class="panel wide">
+    <div class="panel-title">ต้นทุนของเสีย/เศษวัสดุ (Waste & Scrap Cost) <span class="tag">ต่อเดือน</span></div>
+    <div class="chart-canvas-box"><canvas id="wasteChart"></canvas></div>
+  </div>
+
+  <div class="panel wide">
+    <div class="panel-title">ต้นทุนพลังงานสุทธิต่อตัน (Net Energy Cost / Ton) <span class="tag">บาท/ตัน</span></div>
+    <div class="chart-canvas-box"><canvas id="energyCostChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--series-1)"></i> ไฟฟ้า</span>
+      <span><i style="background:var(--series-2)"></i> ไอน้ำ</span>
+    </div>
+  </div>
+
+  <div class="panel wide">
+    <div class="panel-title">ต้นทุนต่อตัน (Unit Costs / Ton) <span class="tag">วัตถุดิบ & ค่าโสหุ้ย</span></div>
+    <div class="chart-canvas-box"><canvas id="unitCostChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--series-1)"></i> วัตถุดิบ</span>
+      <span><i style="background:var(--series-2)"></i> ค่าโสหุ้ยคงที่</span>
+    </div>
+  </div>
+
+</section>
+
+<footer class="dash-footer">
+  ข้อมูลทั้งหมดอ่านจาก <code>data/dashboard.json</code> — แก้ไขไฟล์นี้เพื่ออัปเดตแดชบอร์ด ไม่ต้องแก้โค้ด
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "company_th": "บริษัท ไทยเยื่อไผ่ จำกัด",
+    "dashboard_title_th": "แดชบอร์ดผู้บริหาร - โรงงานเยื่อไผ่",
+    "currency": "THB",
+    "production_unit": "ตัน/วัน",
+    "updated_at": "2026-09-19T07:30:00+07:00",
+    "period_label": "24 ชั่วโมงล่าสุด"
+  },
+
+  "kpi_summary": {
+    "total_gross_revenue": {
+      "current_thb": 134200000,
+      "unit_label": "บาท",
+      "months": ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."],
+      "trend_thb": [92500000, 98100000, 101400000, 108300000, 115200000, 110600000, 118400000, 125100000, 121700000, 130200000, 127800000, 134200000]
+    },
+    "gross_profit_margin": {
+      "current_pct": 35,
+      "target_pct": 45
+    },
+    "otif": {
+      "current_pct": 96,
+      "green_min_pct": 95,
+      "yellow_min_pct": 90
+    },
+    "delivery_risk": {
+      "score": 14,
+      "max_score": 100,
+      "level": "ต่ำ",
+      "orders_at_risk": 3
+    }
+  },
+
+  "sites": [
+    {
+      "id": "PCB",
+      "name_th": "เพชรบูรณ์",
+      "province_th": "จ.เพชรบูรณ์",
+      "country_th": "ประเทศไทย",
+      "status": "ONLINE",
+      "map_position": { "x": 176, "y": 188 },
+      "production_ton_day": 185,
+      "capacity_ton_day": 200,
+      "inventory_ton": 3120,
+      "demand_fulfillment_pct": 98,
+      "capacity_utilization_pct": 92,
+      "storage_utilization_pct": 74,
+      "power_mw": 8.2,
+      "renewable_pct": 58,
+      "energy_efficiency_pct": 71,
+      "asset_health_pct": 88,
+      "anomalies_total": 3,
+      "overdue_work_orders": 2,
+      "power_mix_mw": { "solar": 2.1, "biomass": 2.7, "grid": 3.4 },
+      "anomalies_by_equipment": { "digester": 1, "washer": 1, "bleach": 0, "dryer": 1, "press": 0 },
+      "inventory_value_thb": 28400000,
+      "days_on_hand": 18
+    },
+    {
+      "id": "SKA",
+      "name_th": "สงขลา",
+      "province_th": "จ.สงขลา",
+      "country_th": "ประเทศไทย",
+      "status": "ONLINE",
+      "map_position": { "x": 174, "y": 612 },
+      "production_ton_day": 142,
+      "capacity_ton_day": 170,
+      "inventory_ton": 2540,
+      "demand_fulfillment_pct": 100,
+      "capacity_utilization_pct": 85,
+      "storage_utilization_pct": 68,
+      "power_mw": 6.4,
+      "renewable_pct": 49,
+      "energy_efficiency_pct": 66,
+      "asset_health_pct": 91,
+      "anomalies_total": 1,
+      "overdue_work_orders": 0,
+      "power_mix_mw": { "solar": 1.6, "biomass": 1.5, "grid": 3.3 },
+      "anomalies_by_equipment": { "digester": 0, "washer": 1, "bleach": 0, "dryer": 0, "press": 0 },
+      "inventory_value_thb": 21700000,
+      "days_on_hand": 22
+    },
+    {
+      "id": "CNX",
+      "name_th": "เชียงใหม่",
+      "province_th": "จ.เชียงใหม่",
+      "country_th": "ประเทศไทย",
+      "status": "ONLINE",
+      "map_position": { "x": 112, "y": 55 },
+      "production_ton_day": 96,
+      "capacity_ton_day": 130,
+      "inventory_ton": 1860,
+      "demand_fulfillment_pct": 94,
+      "capacity_utilization_pct": 78,
+      "storage_utilization_pct": 61,
+      "power_mw": 4.1,
+      "renewable_pct": 63,
+      "energy_efficiency_pct": 69,
+      "asset_health_pct": 82,
+      "anomalies_total": 4,
+      "overdue_work_orders": 3,
+      "power_mix_mw": { "solar": 1.0, "biomass": 1.6, "grid": 1.5 },
+      "anomalies_by_equipment": { "digester": 1, "washer": 1, "bleach": 1, "dryer": 1, "press": 0 },
+      "inventory_value_thb": 15200000,
+      "days_on_hand": 26
+    }
+  ],
+
+  "order_execution": [
+    { "id": "ORD-1042", "stage_th": "บรรจุภัณฑ์", "site_id": "PCB", "status_th": "กำลังดำเนินการ", "progress_pct": 70 },
+    { "id": "ORD-1043", "stage_th": "ผลิตเยื่อ", "site_id": "SKA", "status_th": "กำลังผลิต", "progress_pct": 45 },
+    { "id": "ORD-1044", "stage_th": "เตรียมเส้นใย", "site_id": "CNX", "status_th": "รอคิว", "progress_pct": 10 }
+  ],
+
+  "performance_overview": {
+    "days_th": ["จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส.", "อา."],
+    "production_ton": [380, 410, 395, 430, 405, 360, 340],
+    "delivery_plan_ton": [370, 400, 400, 420, 415, 380, 350]
+  },
+
+  "waste_scrap": {
+    "total_thb": 1850000,
+    "categories_th": ["เส้นใยไผ่ดิบ", "เยื่อ", "บรรจุภัณฑ์"],
+    "share_pct": [42, 33, 25]
+  },
+
+  "net_energy_cost": {
+    "days_th": ["จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส.", "อา."],
+    "electricity_thb_per_ton": [420, 450, 410, 470, 430, 390, 405],
+    "steam_thb_per_ton": [180, 190, 175, 200, 185, 170, 178]
+  },
+
+  "unit_cost": {
+    "days_th": ["จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส.", "อา."],
+    "material_thb_per_ton": [2800, 2830, 2810, 2850, 2870, 2860, 2890],
+    "overhead_thb_per_ton": [950, 960, 955, 970, 980, 975, 990]
+  }
+}
