@@ -82,6 +82,9 @@ function renderHeader() {
 function renderKpiRow() {
   const rev = DATA.kpi_summary.total_gross_revenue;
   document.getElementById("kpiRevenueValue").textContent = fmtTHB(rev.current_thb);
+  const revYear = new Date(DATA.meta.updated_at).toLocaleDateString("th-TH", { year: "numeric" });
+  document.getElementById("revenuePeriodCaption").textContent =
+    `สะสม ${rev.months.length} เดือน (${rev.months[0]} - ${rev.months[rev.months.length - 1]} ${revYear})`;
   const ctx = document.getElementById("revenueSparkline");
   chartInstances.push(
     new Chart(ctx, {
