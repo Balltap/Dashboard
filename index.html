@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=10" />
+<link rel="stylesheet" href="assets/style.css?v=11" />
 <script src="assets/chart.umd.js"></script>
 </head>
 <body>
@@ -41,11 +41,17 @@
 
 <!-- KPI summary row -->
 <section class="kpi-row">
-  <div class="panel kpi-tile">
-    <div class="kpi-label">รายได้รวม (Total Gross Revenue)</div>
+  <div class="panel kpi-tile kpi-tile-revenue">
+    <div class="kpi-tile-head">
+      <div class="kpi-label">รายได้รวม (Total Gross Revenue)</div>
+      <div class="kpi-tile-icons">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M20 9l-4-4-4 4-4-4"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M10.5 6.2h1.6a1.3 1.3 0 0 1 0 2.6h-1a1.3 1.3 0 0 0 0 2.6h1.9"/><path d="M4 21c1-3 4-4.5 8-4.5s7 1.5 8 4.5"/></svg>
+      </div>
+    </div>
     <div class="kpi-value" id="kpiRevenueValue">-</div>
     <div class="kpi-sub" id="revenuePeriodCaption">-</div>
-    <div class="chart-canvas-box short"><canvas id="revenueSparkline"></canvas></div>
+    <div class="chart-canvas-box revenue-chart"><canvas id="revenueSparkline"></canvas></div>
   </div>
 
   <div class="panel kpi-tile">
@@ -219,6 +225,6 @@
 
 </section>
 
-<script src="assets/app.js?v=11"></script>
+<script src="assets/app.js?v=13"></script>
 </body>
 </html>

@@ -79,6 +79,10 @@ function renderHeader() {
   document.getElementById("periodLabel").textContent = "ช่วงข้อมูล: " + DATA.meta.period_label;
 }
 
+function fmtMillionsShort(n) {
+  return (n / 1e6).toFixed(2).replace(/0$/, "").replace(/\.$/, "") + "M";
+}
+
 function renderKpiRow() {
   const rev = DATA.kpi_summary.total_gross_revenue;
   document.getElementById("kpiRevenueValue").textContent = fmtTHB(rev.current_thb);
@@ -86,6 +90,34 @@ function renderKpiRow() {
   document.getElementById("revenuePeriodCaption").textContent =
     `สะสม ${rev.months.length} เดือน (${rev.months[0]} - ${rev.months[rev.months.length - 1]} ${revYear})`;
   const ctx = document.getElementById("revenueSparkline");
+  // Label only the first/last point and the trend's low/high so the small card doesn't get cluttered.
+  const revData = rev.trend_thb;
+  const revLabelIdx = new Set([
+    0,
+    revData.length - 1,
+    revData.indexOf(Math.min(...revData)),
+    revData.indexOf(Math.max(...revData)),
+  ]);
+  const revenueDataLabelsPlugin = {
+    id: "revenueDataLabels",
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea } = chart;
+      const meta = chart.getDatasetMeta(0);
+      ctx.save();
+      ctx.font = "700 9px 'Noto Sans Thai', sans-serif";
+      ctx.fillStyle = cssVar("--text-primary");
+      revLabelIdx.forEach((i) => {
+        const pt = meta.data[i];
+        if (!pt) return;
+        // Keep labels near the left/right edge from clipping outside the canvas.
+        const nearLeft = pt.x - chartArea.left < 18;
+        const nearRight = chartArea.right - pt.x < 18;
+        ctx.textAlign = nearLeft ? "left" : nearRight ? "right" : "center";
+        ctx.fillText(fmtMillionsShort(revData[i]), pt.x, pt.y - 8);
+      });
+      ctx.restore();
+    },
+  };
   chartInstances.push(
     new Chart(ctx, {
       type: "line",
@@ -105,9 +137,19 @@ function renderKpiRow() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: { top: 14 } },
         plugins: { legend: { display: false }, tooltip: { enabled: true } },
-        scales: { x: { display: false }, y: { display: false } },
+        scales: {
+          x: {
+            display: true,
+            grid: { display: false },
+            border: { display: false },
+            ticks: { autoSkip: true, maxTicksLimit: 5, font: { size: 9 }, color: cssVar("--text-muted") },
+          },
+          y: { display: false },
+        },
       },
+      plugins: [revenueDataLabelsPlugin],
     })
   );
 

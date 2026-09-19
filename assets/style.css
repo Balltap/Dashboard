@@ -228,6 +228,18 @@ body {
 .kpi-tile .kpi-value { font-size: 22px; font-weight: 700; line-height: 1.1; }
 .kpi-tile .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
+.kpi-tile-revenue {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--series-1) 18%, var(--surface-1)) 0%,
+    var(--surface-1) 55%,
+    color-mix(in srgb, var(--series-4) 16%, var(--surface-1)) 100%);
+}
+.kpi-tile-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.kpi-tile-head .kpi-label { margin-bottom: 0; }
+.kpi-tile-icons { display: flex; gap: 6px; color: var(--text-muted); flex: 0 0 auto; }
+.kpi-tile-revenue .kpi-value { font-size: 26px; }
+.chart-canvas-box.revenue-chart { flex: 0 0 auto; height: 76px; margin-top: 6px; }
+
 .gauge-wrap { display: flex; flex-direction: column; align-items: center; }
 .gauge-value { font-size: 20px; font-weight: 700; margin-top: -26px; }
 .gauge-caption { font-size: 10px; color: var(--text-muted); display: flex; justify-content: space-between; width: 100%; margin-top: 2px; }
@@ -428,7 +440,6 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .legend-row i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
 
 .chart-canvas-box { position: relative; min-height: 0; }
-.chart-canvas-box.short { flex: 0 0 auto; height: 34px; }
 
 /* Below this width there isn't room for a no-scroll desktop layout - fall back to a scrolling single column */
 @media (max-width: 1200px), (max-height: 700px) {
