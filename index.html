@@ -108,7 +108,33 @@
       <div class="panel-title">แผนที่โรงงานในประเทศไทย <span class="tag">3 จังหวัด</span></div>
       <div class="map-wrap" id="mapWrap">
         <svg class="map-svg" id="thailandMap" viewBox="0 0 300 700" xmlns="http://www.w3.org/2000/svg">
-          <path class="th-outline" d="M100,20 L140,10 L170,40 L190,70 L230,90 L270,110 L290,160 L280,210 L250,230 L220,250 L200,270 L190,300 L170,320 L185,340 L200,370 L195,420 L190,470 L185,520 L180,570 L175,610 L170,650 L160,670 L150,650 L140,600 L135,550 L130,500 L125,450 L120,400 L115,350 L110,320 L100,280 L90,240 L80,200 L75,150 L80,100 L90,60 Z" />
+          <defs>
+            <linearGradient id="mapFaceGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+              <stop offset="0%" stop-color="var(--map-face-a)" />
+              <stop offset="55%" stop-color="var(--map-face-b)" />
+              <stop offset="100%" stop-color="var(--map-face-c)" />
+            </linearGradient>
+            <linearGradient id="mapSideGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--map-side-a)" />
+              <stop offset="100%" stop-color="var(--map-side-b)" />
+            </linearGradient>
+            <radialGradient id="mapSheenGrad" cx="28%" cy="12%" r="55%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </radialGradient>
+            <filter id="mapDropShadow" x="-30%" y="-15%" width="160%" height="140%">
+              <feDropShadow dx="5" dy="16" stdDeviation="14" flood-color="#0b0b0b" flood-opacity="0.35" />
+            </filter>
+            <filter id="pinDropShadow" x="-150%" y="-150%" width="400%" height="400%">
+              <feDropShadow dx="0" dy="3" stdDeviation="2.2" flood-color="#0b0b0b" flood-opacity="0.45" />
+            </filter>
+          </defs>
+          <g filter="url(#mapDropShadow)">
+            <path class="th-side" transform="translate(5,15)" d="M100,20 L140,10 L170,40 L190,70 L230,90 L270,110 L290,160 L280,210 L250,230 L220,250 L200,270 L190,300 L170,320 L185,340 L200,370 L195,420 L190,470 L185,520 L180,570 L175,610 L170,650 L160,670 L150,650 L140,600 L135,550 L130,500 L125,450 L120,400 L115,350 L110,320 L100,280 L90,240 L80,200 L75,150 L80,100 L90,60 Z" />
+            <path class="th-rim" transform="translate(-1.5,-1.5)" d="M100,20 L140,10 L170,40 L190,70 L230,90 L270,110 L290,160 L280,210 L250,230 L220,250 L200,270 L190,300 L170,320 L185,340 L200,370 L195,420 L190,470 L185,520 L180,570 L175,610 L170,650 L160,670 L150,650 L140,600 L135,550 L130,500 L125,450 L120,400 L115,350 L110,320 L100,280 L90,240 L80,200 L75,150 L80,100 L90,60 Z" />
+            <path class="th-face" d="M100,20 L140,10 L170,40 L190,70 L230,90 L270,110 L290,160 L280,210 L250,230 L220,250 L200,270 L190,300 L170,320 L185,340 L200,370 L195,420 L190,470 L185,520 L180,570 L175,610 L170,650 L160,670 L150,650 L140,600 L135,550 L130,500 L125,450 L120,400 L115,350 L110,320 L100,280 L90,240 L80,200 L75,150 L80,100 L90,60 Z" />
+            <path class="th-sheen" d="M100,20 L140,10 L170,40 L190,70 L230,90 L270,110 L290,160 L280,210 L250,230 L220,250 L200,270 L190,300 L170,320 L185,340 L200,370 L195,420 L190,470 L185,520 L180,570 L175,610 L170,650 L160,670 L150,650 L140,600 L135,550 L130,500 L125,450 L120,400 L115,350 L110,320 L100,280 L90,240 L80,200 L75,150 L80,100 L90,60 Z" />
+          </g>
           <g id="mapPins"></g>
         </svg>
         <div class="map-popup" id="mapPopup" style="display:none;"></div>

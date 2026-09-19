@@ -203,9 +203,13 @@ function renderMap() {
     pin.setAttribute("transform", `translate(${s.map_position.x}, ${s.map_position.y})`);
     pin.setAttribute("data-site-id", s.id);
     pin.innerHTML = `
-      <circle class="pulse" r="16"></circle>
-      <circle class="dot" r="6"></circle>
-      <text x="11" y="4">${s.name_th}</text>`;
+      <ellipse class="pin-ground-shadow" cx="0" cy="3" rx="10" ry="3.5"></ellipse>
+      <circle class="pin-pulse" cx="0" cy="0" r="6"></circle>
+      <path class="pin-body" filter="url(#pinDropShadow)"
+        d="M0,0 C-12,-17 -14,-25 -14,-31 C-14,-42 -7.7,-50 0,-50 C7.7,-50 14,-42 14,-31 C14,-25 12,-17 0,0 Z"></path>
+      <circle class="pin-hole" cx="0" cy="-31" r="6.5"></circle>
+      <ellipse class="pin-highlight" cx="-5" cy="-40" rx="4" ry="6" transform="rotate(-25 -5 -40)"></ellipse>
+      <text x="19" y="-27">${s.name_th}</text>`;
     pin.addEventListener("click", (e) => {
       e.stopPropagation();
       showPopup(s);
