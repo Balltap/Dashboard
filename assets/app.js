@@ -495,13 +495,20 @@ function initTheme() {
   });
 }
 
-fetch(DATA_URL)
+fetch(DATA_URL, { cache: "no-store" })
   .then((r) => r.json())
   .then((json) => {
     DATA = json;
-    renderAll();
+    try {
+      renderAll();
+    } catch (err) {
+      document.body.innerHTML =
+        '<p style="padding:40px;font-family:sans-serif;">เกิดข้อผิดพลาดขณะแสดงผลแดชบอร์ด: ' + err + "</p>";
+      throw err;
+    }
   })
   .catch((err) => {
+    if (DATA) return; // render error already reported above
     document.body.innerHTML =
       '<p style="padding:40px;font-family:sans-serif;">ไม่สามารถโหลดข้อมูล data/dashboard.json ได้: ' + err + "</p>";
   });
