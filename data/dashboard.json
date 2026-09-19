@@ -55,7 +55,10 @@
       "power_mix_mw": { "solar": 2.1, "biomass": 2.7, "grid": 3.4 },
       "anomalies_by_equipment": { "digester": 1, "washer": 1, "bleach": 0, "dryer": 1, "press": 0 },
       "inventory_value_thb": 28400000,
-      "days_on_hand": 18
+      "days_on_hand": 18,
+      "electricity_cost_thb_per_ton": 410,
+      "water_cost_thb_per_ton": 85,
+      "production_cost_thb_per_ton": 3620
     },
     {
       "id": "SKA",
@@ -79,7 +82,10 @@
       "power_mix_mw": { "solar": 1.6, "biomass": 1.5, "grid": 3.3 },
       "anomalies_by_equipment": { "digester": 0, "washer": 1, "bleach": 0, "dryer": 0, "press": 0 },
       "inventory_value_thb": 21700000,
-      "days_on_hand": 22
+      "days_on_hand": 22,
+      "electricity_cost_thb_per_ton": 380,
+      "water_cost_thb_per_ton": 95,
+      "production_cost_thb_per_ton": 3540
     },
     {
       "id": "CNX",
@@ -103,7 +109,10 @@
       "power_mix_mw": { "solar": 1.0, "biomass": 1.6, "grid": 1.5 },
       "anomalies_by_equipment": { "digester": 1, "washer": 1, "bleach": 1, "dryer": 1, "press": 0 },
       "inventory_value_thb": 15200000,
-      "days_on_hand": 26
+      "days_on_hand": 26,
+      "electricity_cost_thb_per_ton": 455,
+      "water_cost_thb_per_ton": 78,
+      "production_cost_thb_per_ton": 3810
     }
   ],
 

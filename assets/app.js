@@ -104,14 +104,9 @@ function renderKpiRow() {
     "ต่ำกว่าเป้า " + (margin.target_pct - margin.current_pct) + "%";
 
   const otif = DATA.kpi_summary.otif;
-  const otifColor =
-    otif.current_pct >= otif.green_min_pct
-      ? cssVar("--status-good")
-      : otif.current_pct >= otif.yellow_min_pct
-      ? cssVar("--status-warning")
-      : cssVar("--status-critical");
-  drawGauge(document.getElementById("otifGauge"), otif.current_pct, otifColor);
-  document.getElementById("otifGaugeValue").textContent = otif.current_pct + "%";
+  const otifPct = Math.max(0, Math.min(100, otif.current_pct));
+  document.getElementById("otifPointer").style.left = otifPct + "%";
+  document.getElementById("otifPointerValue").textContent = otif.current_pct + "%";
 
   const risk = DATA.kpi_summary.delivery_risk;
   document.getElementById("riskScoreValue").textContent = risk.score + "/" + risk.max_score;
@@ -235,7 +230,7 @@ function siteCardHTML(s) {
       <div class="metric-block">
         <div class="mb-label">สินค้าคงคลัง</div>
         <div class="mb-value">${fmtNum(s.inventory_ton)} <span style="font-size:11px;font-weight:400;">ตัน</span></div>
-        <div class="mb-sub">ใช้พื้นที่คลัง ${s.storage_utilization_pct}%</div>
+        <div class="mb-sub">ใช้พื้นที่คลัง ${s.storage_utilization_pct}% · สำรอง (DOH) ${s.days_on_hand} วัน</div>
       </div>
       <div class="metric-block">
         <div class="mb-label">กำลังไฟฟ้า</div>
@@ -246,6 +241,15 @@ function siteCardHTML(s) {
         <div class="mb-label">สุขภาพเครื่องจักร</div>
         <div class="mb-value">${s.asset_health_pct}%</div>
         <div class="mini-bar-track" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${s.asset_health_pct}%; background:${cssVar(SITE_COLOR_VAR[s.id])}"></div></div>
+      </div>
+      <div class="metric-block">
+        <div class="mb-label">ค่าไฟ / ค่าน้ำ ต่อตัน</div>
+        <div class="mb-value">${fmtNum(s.electricity_cost_thb_per_ton)} <span style="font-size:11px;font-weight:400;">฿</span></div>
+        <div class="mb-sub">ไฟฟ้า ${fmtNum(s.electricity_cost_thb_per_ton)} ฿ · น้ำ ${fmtNum(s.water_cost_thb_per_ton)} ฿</div>
+      </div>
+      <div class="metric-block" style="grid-column: 1 / -1;">
+        <div class="mb-label">ต้นทุนการผลิตเยื่อ 1 ตัน</div>
+        <div class="mb-value">${fmtNum(s.production_cost_thb_per_ton)} <span style="font-size:11px;font-weight:400;">฿/ตัน</span></div>
       </div>
     </div>
     <div class="site-card-foot">

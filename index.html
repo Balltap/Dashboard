@@ -43,10 +43,20 @@
 
   <div class="panel kpi-tile">
     <div class="kpi-label">การส่งมอบตรงเวลา ครบถ้วน (OTIF)</div>
-    <div class="gauge-wrap">
-      <svg id="otifGauge" width="150" height="90" viewBox="0 0 150 90"></svg>
-      <div class="gauge-value" id="otifGaugeValue">-</div>
-      <div class="gauge-caption"><span>&lt;90% แดง</span><span>&gt;95% เขียว</span></div>
+    <div class="otif-bar-wrap">
+      <div class="otif-scale">
+        <div class="otif-pointer" id="otifPointer" style="left:0%">
+          <span class="otif-pointer-value" id="otifPointerValue">-</span>
+          <svg class="otif-pointer-arrow" width="10" height="6" viewBox="0 0 10 6"><path d="M0,0 L10,0 L5,6 Z" /></svg>
+        </div>
+        <div class="otif-bar-track otif-bar-main"></div>
+        <div class="otif-bar-track otif-bar-sub"></div>
+      </div>
+      <div class="otif-legend">
+        <span><i class="dot good"></i>เขียว &gt;95%</span>
+        <span><i class="dot warn"></i>เหลือง 90-95%</span>
+        <span><i class="dot crit"></i>แดง &lt;90%</span>
+      </div>
     </div>
   </div>
 
