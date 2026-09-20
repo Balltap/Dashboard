@@ -292,12 +292,14 @@ body {
 .otif-legend .dot.warn { background: var(--status-warning); }
 .otif-legend .dot.crit { background: var(--status-critical); }
 
-.risk-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 5px; }
-.risk-cell { border-radius: 6px; padding: 4px; text-align: center; font-size: 10px; color: #ffffff; font-weight: 600; }
-.risk-cell.low { background: var(--status-good); }
-.risk-cell.med { background: var(--status-warning); color: #241a00; }
-.risk-cell.high { background: var(--status-critical); }
-.risk-cell.dim { opacity: 0.35; }
+.risk-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-bottom: 8px; }
+.risk-cell {
+  border-radius: 6px; padding: 5px 4px; text-align: center; font-size: 10px; font-weight: 600;
+  background: transparent; border: 1.5px solid var(--border); color: var(--text-muted);
+}
+.risk-cell.current.low { background: var(--status-good); border-color: var(--status-good); color: #ffffff; }
+.risk-cell.current.med { background: var(--status-warning); border-color: var(--status-warning); color: #241a00; }
+.risk-cell.current.high { background: var(--status-critical); border-color: var(--status-critical); color: #ffffff; }
 .risk-score-row { display: flex; align-items: baseline; justify-content: space-between; }
 .risk-score-row .score { font-size: 20px; font-weight: 700; }
 .risk-score-row .level { font-size: 12px; font-weight: 600; color: var(--status-good); }
@@ -330,6 +332,10 @@ body {
 .rail .panel:not(.auto-h) { min-height: 88px; }
 .rail .panel .chart-canvas-box,
 .map-center .panel .chart-canvas-box { flex: 1 1 auto; min-height: 0; }
+/* Caps how far this chart grows on tall viewports (it's the left rail's only flex-growing
+   panel since the others are auto-h) while still letting it shrink on short ones like its
+   siblings do. */
+.rail .panel[data-nav-id="waste"] { max-height: 230px; }
 .rail .panel-title, .map-center .panel-title { margin-bottom: 4px; }
 
 /* ---------- tables ---------- */
@@ -484,6 +490,13 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .legend-row i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
 
 .chart-canvas-box { position: relative; min-height: 0; }
+
+/* Slightly tighter rail spacing on shorter screens (laptop-class heights) that still use the
+   desktop grid, so the per-column scroll fallback below has less to make up for. */
+@media (max-height: 950px) {
+  .rail .panel, .map-center .panel { padding: 6px 12px; }
+  .rail .panel-title, .map-center .panel-title { margin-bottom: 3px; }
+}
 
 /* Below this width there isn't room for a no-scroll desktop layout - fall back to a scrolling single column */
 @media (max-width: 1200px), (max-height: 700px) {

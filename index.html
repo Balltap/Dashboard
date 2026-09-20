@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=14" />
+<link rel="stylesheet" href="assets/style.css?v=17" />
 <script src="assets/chart.umd.js"></script>
 </head>
 <body>
@@ -85,9 +85,10 @@
 
   <div class="panel kpi-tile" data-nav-id="risk" data-nav-label="ความเสี่ยงการส่งมอบ (Delivery Risk Score)">
     <div class="kpi-label">ความเสี่ยงการส่งมอบ (Delivery Risk Score)</div>
-    <div class="risk-matrix">
-      <div class="risk-cell low">ต่ำ</div><div class="risk-cell med">กลาง</div><div class="risk-cell high">สูง</div>
-      <div class="risk-cell low dim">ต่ำ</div><div class="risk-cell med dim">กลาง</div><div class="risk-cell high dim">สูง</div>
+    <div class="risk-matrix" id="riskMatrix">
+      <div class="risk-cell low" data-level="ต่ำ">ต่ำ</div>
+      <div class="risk-cell med" data-level="กลาง">กลาง</div>
+      <div class="risk-cell high" data-level="สูง">สูง</div>
     </div>
     <div class="risk-score-row">
       <span class="score" id="riskScoreValue">-</span>
@@ -227,6 +228,6 @@
 
 </section>
 
-<script src="assets/app.js?v=15"></script>
+<script src="assets/app.js?v=16"></script>
 </body>
 </html>

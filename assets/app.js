@@ -170,6 +170,9 @@ function renderKpiRow() {
   document.getElementById("riskLevelValue").textContent = "ความเสี่ยง" + risk.level;
   document.getElementById("riskOrdersAtRisk").textContent =
     "คำสั่งซื้อที่มีความเสี่ยง: " + risk.orders_at_risk + " รายการ";
+  document.querySelectorAll("#riskMatrix .risk-cell").forEach((cell) => {
+    cell.classList.toggle("current", cell.dataset.level === risk.level);
+  });
 }
 
 /* ---------------- Left column: total production, table, power mix, anomalies ---------------- */
@@ -656,7 +659,7 @@ function renderWasteChart() {
   }
   const wasteColors = [cssVar("--series-1"), cssVar("--series-2"), cssVar("--series-3")];
   legend.innerHTML = w.categories_th
-    .map((c, i) => `<span><i style="background:${wasteColors[i]}"></i>${c}</span>`)
+    .map((c, i) => `<span><i style="background:${wasteColors[i]}"></i>${c} ${w.share_pct[i]}%</span>`)
     .join("");
 }
 
