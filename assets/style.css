@@ -120,6 +120,9 @@ body {
   gap: 16px;
   flex-wrap: wrap;
   flex: 0 0 auto;
+  /* Matches the old header + separate search row's combined height, so folding the
+     search bar into this row doesn't hand extra height to the map/panels below. */
+  min-height: 119px;
 }
 .dash-header > div:first-child { flex: 0 0 auto; }
 .dash-header h1 { font-size: 18px; margin: 0 0 2px; }
