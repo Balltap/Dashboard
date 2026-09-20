@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=12" />
+<link rel="stylesheet" href="assets/style.css?v=13" />
 <script src="assets/chart.umd.js"></script>
 </head>
 <body>
@@ -17,27 +17,25 @@
     <h1 id="dashTitle">แดชบอร์ดผู้บริหาร - โรงงานเยื่อไผ่</h1>
     <p class="subtitle" id="dashCompany">บริษัท ไทยเยื่อไผ่ จำกัด · 3 โรงงาน: เพชรบูรณ์ · สงขลา · เชียงใหม่</p>
   </div>
+  <div class="ai-search-row">
+    <form class="ai-search-bar" id="aiSearchForm">
+      <span class="ai-plus" aria-hidden="true">+</span>
+      <input type="text" id="aiSearchInput" placeholder="ถามคำถาม หรือค้นหาชื่อโรงงาน/จังหวัด เช่น เชียงใหม่" autocomplete="off" />
+      <button type="button" class="icon-btn" aria-label="ค้นหาด้วยเสียง" title="ค้นหาด้วยเสียง">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4M8 23h8"/></svg>
+      </button>
+      <button type="submit" class="ai-mode-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z"/></svg>
+        AI Mode
+      </button>
+    </form>
+  </div>
   <div class="meta-right">
     <div id="lastUpdated">อัปเดตล่าสุด: -</div>
     <div id="periodLabel">ช่วงข้อมูล: -</div>
     <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
   </div>
 </header>
-
-<!-- AI search bar -->
-<section class="ai-search-row">
-  <form class="ai-search-bar" id="aiSearchForm">
-    <span class="ai-plus" aria-hidden="true">+</span>
-    <input type="text" id="aiSearchInput" placeholder="ถามคำถาม หรือค้นหาชื่อโรงงาน/จังหวัด เช่น เชียงใหม่" autocomplete="off" />
-    <button type="button" class="icon-btn" aria-label="ค้นหาด้วยเสียง" title="ค้นหาด้วยเสียง">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4M8 23h8"/></svg>
-    </button>
-    <button type="submit" class="ai-mode-pill">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z"/></svg>
-      AI Mode
-    </button>
-  </form>
-</section>
 
 <!-- KPI summary row -->
 <section class="kpi-row">
@@ -122,17 +120,6 @@
         </thead>
         <tbody></tbody>
       </table>
-      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </div>
-
-    <div class="panel" data-nav-id="power-mix" data-nav-label="สัดส่วนแหล่งพลังงาน (MW)">
-      <div class="panel-title">สัดส่วนแหล่งพลังงาน (MW) <span class="tag">รายโรงงาน</span></div>
-      <div class="chart-canvas-box"><canvas id="powerMixChart"></canvas></div>
-      <div class="legend-row">
-        <span><i style="background:var(--series-1)"></i> โซลาร์</span>
-        <span><i style="background:var(--series-2)"></i> ชีวมวล</span>
-        <span><i style="background:var(--series-3)"></i> สายส่งไฟฟ้า</span>
-      </div>
       <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
@@ -240,6 +227,6 @@
 
 </section>
 
-<script src="assets/app.js?v=14"></script>
+<script src="assets/app.js?v=15"></script>
 </body>
 </html>

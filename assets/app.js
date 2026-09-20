@@ -197,37 +197,6 @@ function renderSiteMetricsTable() {
   });
 }
 
-function renderPowerMixChart() {
-  const labels = DATA.sites.map((s) => s.name_th);
-  const solar = DATA.sites.map((s) => s.power_mix_mw.solar);
-  const biomass = DATA.sites.map((s) => s.power_mix_mw.biomass);
-  const grid = DATA.sites.map((s) => s.power_mix_mw.grid);
-  const ctx = document.getElementById("powerMixChart");
-  chartInstances.push(
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels,
-        datasets: [
-          { label: "โซลาร์", data: solar, backgroundColor: cssVar("--series-1"), borderRadius: 4 },
-          { label: "ชีวมวล", data: biomass, backgroundColor: cssVar("--series-2"), borderRadius: 4 },
-          { label: "สายส่งไฟฟ้า", data: grid, backgroundColor: cssVar("--series-3"), borderRadius: 4 },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        layout: { padding: 0 },
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: cssVar("--text-muted"), font: { size: 9 } } },
-          y: { grid: { color: cssVar("--gridline") }, ticks: { color: cssVar("--text-muted"), font: { size: 9 }, maxTicksLimit: 3 } },
-        },
-      },
-    })
-  );
-}
-
 function renderAnomalyTable() {
   const tbody = document.querySelector("#anomalyTable tbody");
   tbody.innerHTML = "";
@@ -757,7 +726,6 @@ function renderAll() {
   renderKpiRow();
   renderTotalProduction();
   renderSiteMetricsTable();
-  renderPowerMixChart();
   renderAnomalyTable();
   renderSiteCostTable();
   renderMap();
