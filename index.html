@@ -7,7 +7,7 @@
 <meta name="description" content="แดชบอร์ดผู้บริหารสำหรับโรงงานเยื่อไผ่ 3 แห่งในประเทศไทย (เพชรบูรณ์ สงขลา เชียงใหม่)" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=11" />
+<link rel="stylesheet" href="assets/style.css?v=12" />
 <script src="assets/chart.umd.js"></script>
 </head>
 <body>
@@ -41,7 +41,7 @@
 
 <!-- KPI summary row -->
 <section class="kpi-row">
-  <div class="panel kpi-tile kpi-tile-revenue">
+  <div class="panel kpi-tile kpi-tile-revenue" data-nav-id="revenue" data-nav-label="รายได้รวม (Total Gross Revenue)">
     <div class="kpi-tile-head">
       <div class="kpi-label">รายได้รวม (Total Gross Revenue)</div>
       <div class="kpi-tile-icons">
@@ -52,18 +52,20 @@
     <div class="kpi-value" id="kpiRevenueValue">-</div>
     <div class="kpi-sub" id="revenuePeriodCaption">-</div>
     <div class="chart-canvas-box revenue-chart"><canvas id="revenueSparkline"></canvas></div>
+    <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
   </div>
 
-  <div class="panel kpi-tile">
+  <div class="panel kpi-tile" data-nav-id="margin" data-nav-label="อัตรากำไรขั้นต้น (Gross Profit Margin)">
     <div class="kpi-label">อัตรากำไรขั้นต้น (Gross Profit Margin)</div>
     <div class="gauge-wrap">
       <svg id="marginGauge" width="112" height="67" viewBox="0 0 150 90"></svg>
       <div class="gauge-value" id="marginGaugeValue">-</div>
       <div class="gauge-caption"><span id="marginCaptionLeft">เป้าหมาย -</span><span id="marginCaptionRight">คงเหลือ -</span></div>
     </div>
+    <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
   </div>
 
-  <div class="panel kpi-tile">
+  <div class="panel kpi-tile" data-nav-id="otif" data-nav-label="การส่งมอบตรงเวลา ครบถ้วน (OTIF)">
     <div class="kpi-label">การส่งมอบตรงเวลา ครบถ้วน (OTIF)</div>
     <div class="otif-bar-wrap">
       <div class="otif-scale">
@@ -80,9 +82,10 @@
         <span><i class="dot crit"></i>แดง &lt;90%</span>
       </div>
     </div>
+    <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
   </div>
 
-  <div class="panel kpi-tile">
+  <div class="panel kpi-tile" data-nav-id="risk" data-nav-label="ความเสี่ยงการส่งมอบ (Delivery Risk Score)">
     <div class="kpi-label">ความเสี่ยงการส่งมอบ (Delivery Risk Score)</div>
     <div class="risk-matrix">
       <div class="risk-cell low">ต่ำ</div><div class="risk-cell med">กลาง</div><div class="risk-cell high">สูง</div>
@@ -93,6 +96,7 @@
       <span class="level" id="riskLevelValue">-</span>
     </div>
     <div class="kpi-sub" id="riskOrdersAtRisk">คำสั่งซื้อที่มีความเสี่ยง: -</div>
+    <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
   </div>
 </section>
 
@@ -100,16 +104,17 @@
 <section class="main-grid">
 
   <div class="rail">
-    <div class="panel auto-h">
+    <div class="panel auto-h" data-nav-id="production" data-nav-label="กำลังผลิตเยื่อไผ่รวม">
       <div class="panel-title">กำลังผลิตเยื่อไผ่รวม <span class="tag" id="periodTagA">24 ชม.ล่าสุด</span></div>
       <div id="totalProdMeterWrap">
         <div class="kpi-value" id="totalProdValue" style="font-size:16px;">-</div>
         <div class="mini-bar-track" style="height:5px;"><div class="mini-bar-fill" id="totalProdBar" style="width:0%"></div></div>
         <div class="kpi-sub" id="totalProdCaption">- / - ตัน/วัน (กำลังการผลิตรวม)</div>
       </div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel auto-h">
+    <div class="panel auto-h" data-nav-id="site-metrics" data-nav-label="สรุปตัวชี้วัดรายโรงงาน">
       <div class="panel-title">สรุปตัวชี้วัดรายโรงงาน <span class="tag">เฉลี่ย/รวม</span></div>
       <table class="site-table" id="siteMetricsTable">
         <thead>
@@ -117,9 +122,10 @@
         </thead>
         <tbody></tbody>
       </table>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel">
+    <div class="panel" data-nav-id="power-mix" data-nav-label="สัดส่วนแหล่งพลังงาน (MW)">
       <div class="panel-title">สัดส่วนแหล่งพลังงาน (MW) <span class="tag">รายโรงงาน</span></div>
       <div class="chart-canvas-box"><canvas id="powerMixChart"></canvas></div>
       <div class="legend-row">
@@ -127,9 +133,10 @@
         <span><i style="background:var(--series-2)"></i> ชีวมวล</span>
         <span><i style="background:var(--series-3)"></i> สายส่งไฟฟ้า</span>
       </div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel auto-h">
+    <div class="panel auto-h" data-nav-id="anomalies" data-nav-label="รายการความผิดปกติของเครื่องจักร">
       <div class="panel-title">รายการความผิดปกติของเครื่องจักร <span class="tag">24 ชม.ล่าสุด</span></div>
       <table class="site-table" id="anomalyTable">
         <thead>
@@ -137,16 +144,19 @@
         </thead>
         <tbody></tbody>
       </table>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel auto-h">
+    <div class="panel auto-h" data-nav-id="orders" data-nav-label="การดำเนินการคำสั่งซื้อ">
       <div class="panel-title">การดำเนินการคำสั่งซื้อ <span class="tag">Order Execution</span></div>
       <div class="order-list" id="orderExecutionList"></div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel">
+    <div class="panel" data-nav-id="waste" data-nav-label="ต้นทุนของเสีย/เศษวัสดุ">
       <div class="panel-title">ต้นทุนของเสีย/เศษวัสดุ <span class="tag">ต่อเดือน</span></div>
       <div class="chart-canvas-box"><canvas id="wasteChart"></canvas></div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
   </div>
 
@@ -180,7 +190,7 @@
   </div>
 
   <div class="rail">
-    <div class="panel auto-h">
+    <div class="panel auto-h" data-nav-id="cost-doh" data-nav-label="ต้นทุน &amp; วันสำรองคลังรายโรงงาน">
       <div class="panel-title">ต้นทุน &amp; วันสำรองคลังรายโรงงาน <span class="tag">บาท/ตัน</span></div>
       <table class="site-table" id="siteCostTable">
         <thead>
@@ -188,43 +198,48 @@
         </thead>
         <tbody></tbody>
       </table>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel">
+    <div class="panel" data-nav-id="performance" data-nav-label="ภาพรวมผลการดำเนินงาน">
       <div class="panel-title">ภาพรวมผลการดำเนินงาน <span class="tag">ผลผลิต vs แผน (ตัน)</span></div>
       <div class="chart-canvas-box"><canvas id="performanceChart"></canvas></div>
       <div class="legend-row">
         <span><i style="background:var(--series-1)"></i> ผลผลิตจริง</span>
         <span><i style="background:var(--series-2)"></i> แผนส่งมอบ</span>
       </div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel">
+    <div class="panel" data-nav-id="inventory" data-nav-label="มูลค่าสินค้าคงคลัง">
       <div class="panel-title">มูลค่าสินค้าคงคลัง <span class="tag">บาท / วันสำรอง</span></div>
       <div class="chart-canvas-box"><canvas id="inventoryChart"></canvas></div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel">
+    <div class="panel" data-nav-id="energy-cost" data-nav-label="ต้นทุนพลังงานสุทธิต่อตัน">
       <div class="panel-title">ต้นทุนพลังงานสุทธิต่อตัน <span class="tag">บาท/ตัน</span></div>
       <div class="chart-canvas-box"><canvas id="energyCostChart"></canvas></div>
       <div class="legend-row">
         <span><i style="background:var(--series-1)"></i> ไฟฟ้า</span>
         <span><i style="background:var(--series-2)"></i> ไอน้ำ</span>
       </div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
 
-    <div class="panel">
+    <div class="panel" data-nav-id="unit-cost" data-nav-label="ต้นทุนต่อตัน">
       <div class="panel-title">ต้นทุนต่อตัน <span class="tag">วัตถุดิบ &amp; ค่าโสหุ้ย</span></div>
       <div class="chart-canvas-box"><canvas id="unitCostChart"></canvas></div>
       <div class="legend-row">
         <span><i style="background:var(--series-1)"></i> วัตถุดิบ</span>
         <span><i style="background:var(--series-2)"></i> ค่าโสหุ้ยคงที่</span>
       </div>
+      <span class="panel-nav-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </div>
   </div>
 
 </section>
 
-<script src="assets/app.js?v=13"></script>
+<script src="assets/app.js?v=14"></script>
 </body>
 </html>

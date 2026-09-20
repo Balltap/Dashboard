@@ -422,6 +422,28 @@ function focusOnSite(site) {
   updateZoomButtonsState();
   showPopup(site);
 }
+function showNavToast(label) {
+  let toast = document.getElementById("navToast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "navToast";
+    toast.className = "nav-toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = `หน้ารายละเอียด "${label}" ยังไม่ได้สร้าง (เร็วๆ นี้)`;
+  toast.classList.remove("show");
+  void toast.offsetWidth; // restart the fade animation on repeated clicks
+  toast.classList.add("show");
+  clearTimeout(showNavToast._t);
+  showNavToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+}
+function initClickableCards() {
+  document.querySelectorAll(".panel[data-nav-id]").forEach((panel) => {
+    panel.addEventListener("click", () => {
+      showNavToast(panel.dataset.navLabel || panel.dataset.navId);
+    });
+  });
+}
 function initAiSearchBar() {
   const form = document.getElementById("aiSearchForm");
   const input = document.getElementById("aiSearchInput");
@@ -768,6 +790,7 @@ fetch(DATA_URL, { cache: "no-store" })
       renderAll();
       initMapZoomPan();
       initAiSearchBar();
+      initClickableCards();
     } catch (err) {
       document.body.innerHTML =
         '<p style="padding:40px;font-family:sans-serif;">เกิดข้อผิดพลาดขณะแสดงผลแดชบอร์ด: ' + err + "</p>";

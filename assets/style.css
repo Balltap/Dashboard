@@ -196,7 +196,11 @@ body {
 
 /* ---------- Generic panel ---------- */
 .panel {
-  background: var(--surface-1);
+  position: relative;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--series-1) 18%, var(--surface-1)) 0%,
+    var(--surface-1) 55%,
+    color-mix(in srgb, var(--series-4) 16%, var(--surface-1)) 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 10px 12px;
@@ -217,6 +221,29 @@ body {
   color: var(--text-muted);
 }
 
+/* ---------- Clickable panels (prepped to link out to detail pages) ---------- */
+.panel[data-nav-id] { cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.panel[data-nav-id]:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,11,11,0.12); }
+.panel[data-nav-id]:active { transform: translateY(0); }
+.panel-nav-chevron {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+}
+.panel[data-nav-id]:hover .panel-nav-chevron { opacity: 1; }
+.panel-nav-chevron svg { width: 10px; height: 10px; }
+
 /* ---------- KPI row ---------- */
 .kpi-row {
   display: grid;
@@ -228,12 +255,6 @@ body {
 .kpi-tile .kpi-value { font-size: 22px; font-weight: 700; line-height: 1.1; }
 .kpi-tile .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
-.kpi-tile-revenue {
-  background: linear-gradient(135deg,
-    color-mix(in srgb, var(--series-1) 18%, var(--surface-1)) 0%,
-    var(--surface-1) 55%,
-    color-mix(in srgb, var(--series-4) 16%, var(--surface-1)) 100%);
-}
 .kpi-tile-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .kpi-tile-head .kpi-label { margin-bottom: 0; }
 .kpi-tile-icons { display: flex; gap: 6px; color: var(--text-muted); flex: 0 0 auto; }
@@ -397,6 +418,26 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 @media (prefers-reduced-motion: reduce) {
   .site-pin .pin-pulse { animation: none; opacity: 0.2; }
 }
+
+.nav-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 12px);
+  background: var(--text-primary);
+  color: var(--page-plane);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(11,11,11,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 100;
+  white-space: nowrap;
+}
+.nav-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 .map-popup {
   position: fixed;
