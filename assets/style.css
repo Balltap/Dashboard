@@ -120,9 +120,6 @@ body {
   gap: 16px;
   flex-wrap: wrap;
   flex: 0 0 auto;
-  /* Matches the old header + separate search row's combined height, so folding the
-     search bar into this row doesn't hand extra height to the map/panels below. */
-  min-height: 119px;
 }
 .dash-header > div:first-child { flex: 0 0 auto; }
 .dash-header h1 { font-size: 18px; margin: 0 0 2px; }
@@ -307,7 +304,7 @@ body {
 /* ---------- Main: left rail / map center / right rail (fills viewport, no page scroll) ---------- */
 .main-grid {
   display: grid;
-  grid-template-columns: 460px 1fr 460px;
+  grid-template-columns: 357px 1fr 357px;
   gap: 10px;
   flex: 1 1 auto;
   min-height: 0;
