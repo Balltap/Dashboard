@@ -410,7 +410,7 @@ function showNavToast(label) {
   showNavToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
 }
 // Detail pages built so far; other data-nav-id panels still show the "coming soon" toast.
-const NAV_PAGES = { revenue: "revenue.html", margin: "margin.html" };
+const NAV_PAGES = { revenue: "revenue.html", margin: "margin.html", otif: "otif.html" };
 function initClickableCards() {
   document.querySelectorAll(".panel[data-nav-id]").forEach((panel) => {
     panel.addEventListener("click", () => {

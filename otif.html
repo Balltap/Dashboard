@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>รายละเอียด OTIF - แดชบอร์ดผู้บริหาร</title>
+<meta name="description" content="วิเคราะห์การส่งมอบตรงเวลาครบถ้วน (OTIF) แนวโน้มรายเดือน แยกองค์ประกอบ และเปรียบเทียบรายโรงงาน" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=21" />
+<script src="assets/chart.umd.js"></script>
+</head>
+<body class="detail-body">
+
+<header class="dash-header">
+  <div>
+    <a class="back-link" href="index.html">&larr; กลับไปหน้าแดชบอร์ด</a>
+    <h1>รายละเอียดการส่งมอบตรงเวลา ครบถ้วน (OTIF)</h1>
+    <p class="subtitle" id="dashCompany">-</p>
+  </div>
+  <div class="meta-right">
+    <div id="lastUpdated">อัปเดตล่าสุด: -</div>
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<section class="kpi-row detail-summary-row">
+  <div class="panel kpi-tile">
+    <div class="kpi-label">OTIF ปัจจุบัน</div>
+    <div class="kpi-value" id="sumOtif">-</div>
+    <div class="kpi-sub" id="sumOtifZone">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">ตรงเวลา (On-Time)</div>
+    <div class="kpi-value" id="sumOnTime">-</div>
+    <div class="kpi-sub">สัดส่วนคำสั่งซื้อที่ส่งถึงตามกำหนด</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">ครบถ้วน (In-Full)</div>
+    <div class="kpi-value" id="sumInFull">-</div>
+    <div class="kpi-sub">สัดส่วนคำสั่งซื้อที่ส่งครบตามจำนวน</div>
+  </div>
+</section>
+
+<section class="detail-grid">
+  <div class="panel">
+    <div class="panel-title">แนวโน้ม OTIF รายเดือน <span class="tag">เทียบเกณฑ์เขียว/เหลือง/แดง</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="otifTrendChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--status-good)"></i> เขียว &ge;95%</span>
+      <span><i style="background:var(--status-warning)"></i> เหลือง 90-95%</span>
+      <span><i style="background:var(--status-critical)"></i> แดง &lt;90%</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">แยกองค์ประกอบ: ตรงเวลา vs ครบถ้วน <span class="tag">รายเดือน</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="otifComponentChart"></canvas></div>
+    <p class="chart-note" id="componentNote">-</p>
+  </div>
+</section>
+
+<section class="panel detail-table-panel">
+  <div class="panel-title">
+    เปรียบเทียบ OTIF รายโรงงาน
+    <span class="tag">ล่าสุด</span>
+  </div>
+  <div class="table-scroll">
+    <table class="ledger-table" id="siteOtifTable">
+      <thead>
+        <tr>
+          <th>โรงงาน</th>
+          <th>ตรงเวลา</th>
+          <th>ครบถ้วน</th>
+          <th>OTIF</th>
+          <th>โซน</th>
+          <th>งานค้างกำหนด</th>
+        </tr>
+      </thead>
+      <tbody id="siteOtifBody"></tbody>
+    </table>
+  </div>
+  <p class="chart-note" id="siteOtifNote"></p>
+</section>
+
+<script src="assets/otif.js?v=2"></script>
+</body>
+</html>

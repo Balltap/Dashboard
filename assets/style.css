@@ -545,3 +545,12 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
   font-weight: 700; color: var(--text-primary);
   border-top: 2px solid var(--text-primary); border-bottom: none;
 }
+
+.zone-badge { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+.zone-badge.zone-good { background: color-mix(in srgb, var(--status-good) 18%, transparent); color: var(--status-good); }
+.zone-badge.zone-warning { background: color-mix(in srgb, var(--status-warning) 22%, transparent); color: #7a5300; }
+.zone-badge.zone-critical { background: color-mix(in srgb, var(--status-critical) 18%, transparent); color: var(--status-critical); }
+:root[data-theme="dark"] .zone-badge.zone-warning { color: var(--status-warning); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .zone-badge.zone-warning { color: var(--status-warning); }
+}

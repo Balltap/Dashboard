@@ -40,7 +40,15 @@
     "otif": {
       "current_pct": 96,
       "green_min_pct": 95,
-      "yellow_min_pct": 90
+      "yellow_min_pct": 90,
+      "on_time_pct_trend": [87.5, 89.0, 90.2, 91.5, 93.0, 90.0, 94.0, 96.0, 93.5, 97.0, 95.0, 98.0],
+      "in_full_pct_trend": [97.0, 97.5, 98.0, 98.0, 97.0, 96.5, 97.0, 98.0, 97.5, 98.0, 97.0, 98.0],
+      "otif_pct_trend": [84.9, 86.8, 88.4, 89.7, 90.2, 86.8, 91.2, 94.1, 91.2, 95.1, 92.2, 96.0],
+      "by_site": {
+        "PCB": { "on_time_pct": 95, "in_full_pct": 98, "otif_pct": 93.1, "overdue_work_orders": 2 },
+        "SKA": { "on_time_pct": 99, "in_full_pct": 100, "otif_pct": 99.0, "overdue_work_orders": 0 },
+        "CNX": { "on_time_pct": 91, "in_full_pct": 94, "otif_pct": 85.5, "overdue_work_orders": 3 }
+      }
     },
     "delivery_risk": {
       "score": 14,
