@@ -554,3 +554,5 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .zone-badge.zone-warning { color: var(--status-warning); }
 }
+
+.ledger-table td.cell-wrap { white-space: normal; text-align: left; max-width: 360px; line-height: 1.45; color: var(--text-secondary); }

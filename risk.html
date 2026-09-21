@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>รายละเอียดความเสี่ยงการส่งมอบ - แดชบอร์ดผู้บริหาร</title>
+<meta name="description" content="วิเคราะห์คะแนนความเสี่ยงการส่งมอบ แนวโน้มรายเดือน ปัจจัยเสี่ยง และคำสั่งซื้อที่มีความเสี่ยง" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=22" />
+<script src="assets/chart.umd.js"></script>
+</head>
+<body class="detail-body">
+
+<header class="dash-header">
+  <div>
+    <a class="back-link" href="index.html">&larr; กลับไปหน้าแดชบอร์ด</a>
+    <h1>รายละเอียดความเสี่ยงการส่งมอบ (Delivery Risk Score)</h1>
+    <p class="subtitle" id="dashCompany">-</p>
+  </div>
+  <div class="meta-right">
+    <div id="lastUpdated">อัปเดตล่าสุด: -</div>
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<section class="kpi-row detail-summary-row">
+  <div class="panel kpi-tile">
+    <div class="kpi-label">คะแนนความเสี่ยงปัจจุบัน</div>
+    <div class="kpi-value" id="sumRiskScore">-</div>
+    <div class="kpi-sub" id="sumRiskZone">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">คำสั่งซื้อที่มีความเสี่ยง</div>
+    <div class="kpi-value" id="sumOrdersAtRisk">-</div>
+    <div class="kpi-sub">จากคำสั่งซื้อที่กำลังดำเนินการทั้งหมด</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">โรงงานที่มีความเสี่ยงสูงสุด</div>
+    <div class="kpi-value" id="sumTopRiskSite">-</div>
+    <div class="kpi-sub" id="sumTopRiskSiteDetail">-</div>
+  </div>
+</section>
+
+<section class="detail-grid">
+  <div class="panel">
+    <div class="panel-title">แนวโน้มคะแนนความเสี่ยงรายเดือน <span class="tag">ยิ่งต่ำยิ่งดี</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="riskTrendChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--status-good)"></i> ต่ำ</span>
+      <span><i style="background:var(--status-warning)"></i> กลาง</span>
+      <span><i style="background:var(--status-critical)"></i> สูง</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">องค์ประกอบของคะแนนความเสี่ยง <span class="tag">คะแนนล่าสุด</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="riskFactorChart"></canvas></div>
+    <p class="chart-note" id="riskFactorNote">-</p>
+  </div>
+</section>
+
+<section class="panel detail-table-panel">
+  <div class="panel-title">
+    คำสั่งซื้อที่มีความเสี่ยง
+    <span class="tag">ล่าสุด</span>
+  </div>
+  <div class="table-scroll">
+    <table class="ledger-table" id="atRiskOrdersTable">
+      <thead>
+        <tr>
+          <th>คำสั่งซื้อ</th>
+          <th>โรงงาน</th>
+          <th>ขั้นตอน</th>
+          <th>ความคืบหน้า</th>
+          <th>ระดับความเสี่ยง</th>
+          <th>เหตุผล</th>
+        </tr>
+      </thead>
+      <tbody id="atRiskOrdersBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<script src="assets/risk.js?v=2"></script>
+</body>
+</html>
