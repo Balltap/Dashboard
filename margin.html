@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>รายละเอียดอัตรากำไรขั้นต้น - แดชบอร์ดผู้บริหาร</title>
+<meta name="description" content="วิเคราะห์อัตรากำไรขั้นต้น แนวโน้มรายเดือน โครงสร้างต้นทุน และเปรียบเทียบรายโรงงาน" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20" />
+<script src="assets/chart.umd.js"></script>
+</head>
+<body class="detail-body">
+
+<header class="dash-header">
+  <div>
+    <a class="back-link" href="index.html">&larr; กลับไปหน้าแดชบอร์ด</a>
+    <h1>รายละเอียดอัตรากำไรขั้นต้น (Gross Profit Margin)</h1>
+    <p class="subtitle" id="dashCompany">-</p>
+  </div>
+  <div class="meta-right">
+    <div id="lastUpdated">อัปเดตล่าสุด: -</div>
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<section class="kpi-row detail-summary-row">
+  <div class="panel kpi-tile">
+    <div class="kpi-label">อัตรากำไรขั้นต้นปัจจุบัน</div>
+    <div class="kpi-value" id="sumCurrentMargin">-</div>
+    <div class="kpi-sub" id="sumMarginGap">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">กำไรขั้นต้นสะสมทั้งปี</div>
+    <div class="kpi-value" id="sumGrossProfit">-</div>
+    <div class="kpi-sub" id="sumCogsTotal">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">ส่วนต่างมาร์จิ้นสูงสุด-ต่ำสุดรายโรงงาน</div>
+    <div class="kpi-value" id="sumSiteSpread">-</div>
+    <div class="kpi-sub" id="sumSiteSpreadDetail">-</div>
+  </div>
+</section>
+
+<section class="detail-grid">
+  <div class="panel">
+    <div class="panel-title">แนวโน้มอัตรากำไรขั้นต้นรายเดือน <span class="tag">% เทียบเป้าหมาย</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="marginTrendChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--series-1)"></i> อัตรากำไรจริง</span>
+      <span><i style="background:var(--text-muted)"></i> เป้าหมาย 45%</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">โครงสร้างกำไร: จากรายได้สู่กำไรขั้นต้น <span class="tag">สะสมทั้งปี, ล้านบาท</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="marginBridgeChart"></canvas></div>
+    <p class="chart-note">วัตถุดิบ (เยื่อไผ่/สารเคมีฟอกขาว) และพลังงาน (ไฟฟ้า/ไอน้ำ) เป็น 2 ต้นทุนหลักที่กินมาร์จิ้นของโรงงานเยื่อไผ่ รวมกันคิดเป็น ~83% ของต้นทุนขายทั้งหมด</p>
+  </div>
+</section>
+
+<section class="panel detail-table-panel">
+  <div class="panel-title">
+    เปรียบเทียบอัตรากำไรขั้นต้นรายโรงงาน
+    <span class="tag">สะสมทั้งปี</span>
+  </div>
+  <div class="table-scroll">
+    <table class="ledger-table" id="siteMarginTable">
+      <thead>
+        <tr>
+          <th>โรงงาน</th>
+          <th>รายได้</th>
+          <th>ต้นทุนขาย (COGS)</th>
+          <th>กำไรขั้นต้น</th>
+          <th>อัตรากำไร</th>
+          <th>ส่วนต่างจากเป้าหมาย</th>
+        </tr>
+      </thead>
+      <tbody id="siteMarginBody"></tbody>
+      <tfoot id="siteMarginFoot"></tfoot>
+    </table>
+  </div>
+  <p class="chart-note" id="siteMarginNote"></p>
+</section>
+
+<script src="assets/margin.js?v=1"></script>
+</body>
+</html>

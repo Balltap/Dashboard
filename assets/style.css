@@ -520,6 +520,12 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .detail-summary-row { grid-template-columns: repeat(3, 1fr); margin-bottom: 12px; }
 .detail-summary-row .kpi-tile { min-height: 0; }
 
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; align-items: stretch; }
+.detail-grid .panel { padding: 16px 18px; display: flex; flex-direction: column; }
+.detail-chart { height: 260px; margin-top: 6px; }
+.chart-note { font-size: 11px; color: var(--text-muted); margin: 10px 0 0; line-height: 1.5; }
+@media (max-width: 1100px) { .detail-grid { grid-template-columns: 1fr; } }
+
 .detail-table-panel { padding: 16px 18px; }
 .table-scroll { overflow-x: auto; }
 .ledger-table { width: 100%; border-collapse: collapse; font-size: 13px; white-space: nowrap; }
