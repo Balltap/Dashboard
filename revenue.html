@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>รายละเอียดรายได้รวม - แดชบอร์ดผู้บริหาร</title>
+<meta name="description" content="ตารางบัญชีรายได้รวมสะสมรายเดือน แยกตามโรงงานเยื่อไผ่ 3 แห่ง" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=19" />
+</head>
+<body class="detail-body">
+
+<header class="dash-header">
+  <div>
+    <a class="back-link" href="index.html">&larr; กลับไปหน้าแดชบอร์ด</a>
+    <h1>รายละเอียดรายได้รวม (Total Gross Revenue)</h1>
+    <p class="subtitle" id="dashCompany">-</p>
+  </div>
+  <div class="meta-right">
+    <div id="lastUpdated">อัปเดตล่าสุด: -</div>
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<section class="kpi-row detail-summary-row">
+  <div class="panel kpi-tile">
+    <div class="kpi-label">ยอดสะสมทั้งปี</div>
+    <div class="kpi-value" id="sumTotal">-</div>
+    <div class="kpi-sub" id="sumPeriod">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">เฉลี่ยต่อเดือน</div>
+    <div class="kpi-value" id="sumAvg">-</div>
+    <div class="kpi-sub">จาก 3 โรงงาน</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">โรงงานที่ทำรายได้สูงสุด</div>
+    <div class="kpi-value" id="sumTopSite">-</div>
+    <div class="kpi-sub" id="sumTopSiteShare">-</div>
+  </div>
+</section>
+
+<section class="panel detail-table-panel">
+  <div class="panel-title">
+    ตารางบัญชีรายได้รวมสะสมรายเดือน แยกตามโรงงาน
+    <span class="tag">หน่วย: บาท</span>
+  </div>
+  <div class="table-scroll">
+    <table class="ledger-table" id="revenueLedger">
+      <thead>
+        <tr>
+          <th>เดือน</th>
+          <th><span class="dot" style="background:var(--series-1)"></span>เพชรบูรณ์</th>
+          <th><span class="dot" style="background:var(--series-2)"></span>สงขลา</th>
+          <th><span class="dot" style="background:var(--series-3)"></span>เชียงใหม่</th>
+          <th>รวมประจำเดือน</th>
+          <th>% เทียบเดือนก่อน</th>
+          <th>ยอดสะสม</th>
+        </tr>
+      </thead>
+      <tbody id="revenueLedgerBody"></tbody>
+      <tfoot id="revenueLedgerFoot"></tfoot>
+    </table>
+  </div>
+</section>
+
+<script src="assets/revenue.js?v=2"></script>
+</body>
+</html>

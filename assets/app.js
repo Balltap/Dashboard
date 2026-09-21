@@ -409,9 +409,16 @@ function showNavToast(label) {
   clearTimeout(showNavToast._t);
   showNavToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
 }
+// Detail pages built so far; other data-nav-id panels still show the "coming soon" toast.
+const NAV_PAGES = { revenue: "revenue.html" };
 function initClickableCards() {
   document.querySelectorAll(".panel[data-nav-id]").forEach((panel) => {
     panel.addEventListener("click", () => {
+      const page = NAV_PAGES[panel.dataset.navId];
+      if (page) {
+        window.location.href = page;
+        return;
+      }
       showNavToast(panel.dataset.navLabel || panel.dataset.navId);
     });
   });
