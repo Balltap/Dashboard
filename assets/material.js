@@ -216,8 +216,11 @@ function renderPithLedger(pith) {
     tr.innerHTML = `
       <td>${m}</td>
       <td>${fmtNum(fiber)}</td>
+      <td>${((fiber / total) * 100).toFixed(1)}%</td>
       <td>${fmtNum(dust)}</td>
+      <td>${((dust / total) * 100).toFixed(1)}%</td>
       <td>${fmtNum(over)}</td>
+      <td>${((over / total) * 100).toFixed(1)}%</td>
       <td class="cell-total">${fmtNum(total)}</td>`;
     tbody.appendChild(tr);
   });
@@ -226,8 +229,11 @@ function renderPithLedger(pith) {
     <tr>
       <td>รวมสะสม</td>
       <td>${fmtNum(sumFiber)}</td>
+      <td>${((sumFiber / sumTotal) * 100).toFixed(1)}%</td>
       <td>${fmtNum(sumDust)}</td>
+      <td>${((sumDust / sumTotal) * 100).toFixed(1)}%</td>
       <td>${fmtNum(sumOver)}</td>
+      <td>${((sumOver / sumTotal) * 100).toFixed(1)}%</td>
       <td>${fmtNum(sumTotal)}</td>
     </tr>`;
 }
