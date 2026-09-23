@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>วัตถุดิบไผ่เข้ากระบวนการเตรียม (เพชรบูรณ์) - แดชบอร์ดผู้บริหาร</title>
+<meta name="description" content="ปริมาณไผ่ที่ผ่านกระบวนการสับย่อย (Chipping) และตัดแยกข้อปล้อง (Node/Joint Separation) รายเดือน จากบันทึกชั่งน้ำหนักจริงของโรงงานเพชรบูรณ์ ปี 2569" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=23" />
+<script src="assets/chart.umd.js"></script>
+</head>
+<body class="detail-body">
+
+<header class="dash-header">
+  <div>
+    <a class="back-link" href="index.html">&larr; กลับไปหน้าแดชบอร์ด</a>
+    <h1>วัตถุดิบไผ่เข้ากระบวนการเตรียม (เพชรบูรณ์)</h1>
+    <p class="subtitle" id="dashCompany">-</p>
+  </div>
+  <div class="meta-right">
+    <div id="lastUpdated">อัปเดตล่าสุด: -</div>
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<div class="data-source-banner" id="dataSourceBanner">-</div>
+
+<section class="kpi-row detail-summary-row">
+  <div class="panel kpi-tile">
+    <div class="kpi-label">ตัดแยกข้อปล้อง สะสม 9 เดือน</div>
+    <div class="kpi-value" id="sumNodeTotal">-</div>
+    <div class="kpi-sub" id="sumNodePeriod">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">สับย่อย (Screened Chip) สะสม</div>
+    <div class="kpi-value" id="sumChipTotal">-</div>
+    <div class="kpi-sub" id="sumChipPeriod">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">สัดส่วนขี้เลื่อยไผ่ (ของเสีย) เทียบยอดตัดแยก</div>
+    <div class="kpi-value" id="sumSawdustPct">-</div>
+    <div class="kpi-sub">ยิ่งต่ำยิ่งดี - สะท้อนประสิทธิภาพการตัดแยก</div>
+  </div>
+</section>
+
+<section class="detail-grid">
+  <div class="panel">
+    <div class="panel-title">ตัดแยกข้อปล้องไผ่รายเดือน <span class="tag">กก., แยกส่วน</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="nodeChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--series-1)"></i> ปล้องไผ่</span>
+      <span><i style="background:var(--series-2)"></i> ข้อไผ่</span>
+      <span><i style="background:var(--series-4)"></i> ขี้เลื่อยไผ่</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">สับย่อยขนาดไผ่ (Chipping) <span class="tag">Screened Chip, กก.</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="chipChart"></canvas></div>
+    <p class="chart-note" id="chipNote">-</p>
+  </div>
+</section>
+
+<section class="panel detail-table-panel">
+  <div class="panel-title">
+    ตารางบันทึกน้ำหนักไผ่ตัดแยกข้อปล้องรายเดือน
+    <span class="tag">หน่วย: กก.</span>
+  </div>
+  <div class="table-scroll">
+    <table class="ledger-table" id="nodeLedger">
+      <thead>
+        <tr>
+          <th>เดือน</th>
+          <th><span class="dot" style="background:var(--series-1)"></span>ปล้องไผ่</th>
+          <th><span class="dot" style="background:var(--series-2)"></span>ข้อไผ่</th>
+          <th><span class="dot" style="background:var(--series-4)"></span>ขี้เลื่อยไผ่</th>
+          <th>รวม</th>
+          <th>% ขี้เลื่อย</th>
+        </tr>
+      </thead>
+      <tbody id="nodeLedgerBody"></tbody>
+      <tfoot id="nodeLedgerFoot"></tfoot>
+    </table>
+  </div>
+  <p class="chart-note" id="sourceNote">-</p>
+</section>
+
+<script src="assets/material.js?v=1"></script>
+</body>
+</html>

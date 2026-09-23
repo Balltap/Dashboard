@@ -556,3 +556,14 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 }
 
 .ledger-table td.cell-wrap { white-space: normal; text-align: left; max-width: 360px; line-height: 1.45; color: var(--text-secondary); }
+
+.data-source-banner {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--series-1) 10%, var(--surface-1));
+  border: 1px solid color-mix(in srgb, var(--series-1) 30%, var(--border));
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
