@@ -178,10 +178,12 @@ function renderLedger(node) {
     tr.innerHTML = `
       <td>${m}</td>
       <td>${fmtNum(internode)}</td>
+      <td>${((internode / total) * 100).toFixed(1)}%</td>
       <td>${fmtNum(nodeW)}</td>
+      <td>${((nodeW / total) * 100).toFixed(1)}%</td>
       <td>${fmtNum(sawdust)}</td>
-      <td class="cell-total">${fmtNum(total)}</td>
-      <td>${((sawdust / total) * 100).toFixed(1)}%</td>`;
+      <td>${((sawdust / total) * 100).toFixed(1)}%</td>
+      <td class="cell-total">${fmtNum(total)}</td>`;
     tbody.appendChild(tr);
   });
 
@@ -189,10 +191,12 @@ function renderLedger(node) {
     <tr>
       <td>รวมสะสม</td>
       <td>${fmtNum(sumInternode)}</td>
+      <td>${((sumInternode / sumTotal) * 100).toFixed(1)}%</td>
       <td>${fmtNum(sumNode)}</td>
+      <td>${((sumNode / sumTotal) * 100).toFixed(1)}%</td>
       <td>${fmtNum(sumSawdust)}</td>
-      <td>${fmtNum(sumTotal)}</td>
       <td>${((sumSawdust / sumTotal) * 100).toFixed(1)}%</td>
+      <td>${fmtNum(sumTotal)}</td>
     </tr>`;
 }
 
