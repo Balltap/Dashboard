@@ -335,7 +335,7 @@
         "x": 467.9,
         "y": 205.1
       },
-      "production_ton_day": 185,
+      "production_ton_day": 0.047,
       "capacity_ton_day": 200,
       "inventory_ton": 3120,
       "demand_fulfillment_pct": 98,
