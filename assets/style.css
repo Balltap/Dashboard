@@ -518,6 +518,7 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 .back-link { display: inline-block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; text-decoration: none; }
 .back-link:hover { text-decoration: underline; }
 .detail-summary-row { grid-template-columns: repeat(3, 1fr); margin-bottom: 12px; }
+.detail-summary-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
 .detail-summary-row .kpi-tile { min-height: 0; }
 
 .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; align-items: stretch; }

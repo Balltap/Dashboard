@@ -40,6 +40,7 @@ function renderHeader(data) {
 function renderSummary(mat) {
   const node = mat.node_separation;
   const chip = mat.chipping;
+  const pith = mat.pith_screening;
 
   const nodeTotal = node.total_kg.reduce((a, b) => a + b, 0);
   document.getElementById("sumNodeTotal").textContent = fmtKg(nodeTotal);
@@ -50,6 +51,11 @@ function renderSummary(mat) {
   document.getElementById("sumChipTotal").textContent = fmtKg(chipTotal);
   document.getElementById("sumChipPeriod").textContent =
     `${chip.period_labels_th[0]} - ${chip.period_labels_th[chip.period_labels_th.length - 1]}`;
+
+  const pithTotal = pith.total_kg.reduce((a, b) => a + b, 0);
+  document.getElementById("sumPithTotal").textContent = fmtKg(pithTotal);
+  document.getElementById("sumPithPeriod").textContent =
+    `${pith.month_labels_th[0]} - ${pith.month_labels_th[pith.month_labels_th.length - 1]}`;
 
   const sawdustTotal = node.sawdust_kg.reduce((a, b) => a + b, 0);
   document.getElementById("sumSawdustPct").textContent = ((sawdustTotal / nodeTotal) * 100).toFixed(1) + "%";
@@ -86,6 +92,37 @@ function renderNodeChart(node) {
       },
     },
   });
+}
+
+function renderPithChart(pith) {
+  const ctx = document.getElementById("pithChart");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: pith.month_labels_th,
+      datasets: [
+        { label: "มัดเส้นใย", data: pith.fiber_bundle_kg, backgroundColor: cssVar("--series-1"), stack: "s" },
+        { label: "ขุยไผ่", data: pith.pith_dust_kg, backgroundColor: cssVar("--series-2"), stack: "s" },
+        { label: "Over-size", data: pith.oversize_kg, backgroundColor: cssVar("--series-4"), stack: "s" },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, stacked: true, ticks: { color: cssVar("--text-muted"), font: { size: 10 } } },
+        y: {
+          stacked: true,
+          grid: { color: cssVar("--gridline") },
+          ticks: { color: cssVar("--text-muted"), font: { size: 10 } },
+          beginAtZero: true,
+          title: { display: true, text: "กก.", color: cssVar("--text-muted"), font: { size: 10 } },
+        },
+      },
+    },
+  });
+  document.getElementById("pithNote").textContent = pith.note_th;
 }
 
 function renderChipChart(chip) {
@@ -159,6 +196,42 @@ function renderLedger(node) {
     </tr>`;
 }
 
+function renderPithLedger(pith) {
+  const tbody = document.getElementById("pithLedgerBody");
+  const tfoot = document.getElementById("pithLedgerFoot");
+  tbody.innerHTML = "";
+  let sumFiber = 0, sumDust = 0, sumOver = 0, sumTotal = 0;
+
+  pith.month_labels_th.forEach((m, i) => {
+    const fiber = pith.fiber_bundle_kg[i];
+    const dust = pith.pith_dust_kg[i];
+    const over = pith.oversize_kg[i];
+    const total = pith.total_kg[i];
+    sumFiber += fiber;
+    sumDust += dust;
+    sumOver += over;
+    sumTotal += total;
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${m}</td>
+      <td>${fmtNum(fiber)}</td>
+      <td>${fmtNum(dust)}</td>
+      <td>${fmtNum(over)}</td>
+      <td class="cell-total">${fmtNum(total)}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  tfoot.innerHTML = `
+    <tr>
+      <td>รวมสะสม</td>
+      <td>${fmtNum(sumFiber)}</td>
+      <td>${fmtNum(sumDust)}</td>
+      <td>${fmtNum(sumOver)}</td>
+      <td>${fmtNum(sumTotal)}</td>
+    </tr>`;
+}
+
 fetch(DATA_URL, { cache: "no-store" })
   .then((r) => r.json())
   .then((data) => {
@@ -168,7 +241,9 @@ fetch(DATA_URL, { cache: "no-store" })
       renderSummary(mat);
       renderNodeChart(mat.node_separation);
       renderChipChart(mat.chipping);
+      renderPithChart(mat.pith_screening);
       renderLedger(mat.node_separation);
+      renderPithLedger(mat.pith_screening);
       initTheme();
     } catch (err) {
       document.body.innerHTML =

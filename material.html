@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>วัตถุดิบไผ่เข้ากระบวนการเตรียม (เพชรบูรณ์) - แดชบอร์ดผู้บริหาร</title>
-<meta name="description" content="ปริมาณไผ่ที่ผ่านกระบวนการสับย่อย (Chipping) และตัดแยกข้อปล้อง (Node/Joint Separation) รายเดือน จากบันทึกชั่งน้ำหนักจริงของโรงงานเพชรบูรณ์ ปี 2569" />
+<meta name="description" content="ปริมาณไผ่ที่ผ่านกระบวนการสับย่อย (Chipping) ตัดแยกข้อปล้อง (Node/Joint Separation) และคัดแยกมัดเส้นใย/ขุยไผ่/Over-size (Pith Screening) รายเดือน จากบันทึกชั่งน้ำหนักจริงของโรงงานเพชรบูรณ์ ปี 2569" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css?v=23" />
@@ -26,7 +26,7 @@
 
 <div class="data-source-banner" id="dataSourceBanner">-</div>
 
-<section class="kpi-row detail-summary-row">
+<section class="kpi-row detail-summary-row cols-4">
   <div class="panel kpi-tile">
     <div class="kpi-label">ตัดแยกข้อปล้อง สะสม 9 เดือน</div>
     <div class="kpi-value" id="sumNodeTotal">-</div>
@@ -36,6 +36,11 @@
     <div class="kpi-label">สับย่อย (Screened Chip) สะสม</div>
     <div class="kpi-value" id="sumChipTotal">-</div>
     <div class="kpi-sub" id="sumChipPeriod">-</div>
+  </div>
+  <div class="panel kpi-tile">
+    <div class="kpi-label">คัดแยกมัดเส้นใย/ขุยไผ่/Over-size สะสม</div>
+    <div class="kpi-value" id="sumPithTotal">-</div>
+    <div class="kpi-sub" id="sumPithPeriod">-</div>
   </div>
   <div class="panel kpi-tile">
     <div class="kpi-label">สัดส่วนขี้เลื่อยไผ่ (ของเสีย) เทียบยอดตัดแยก</div>
@@ -60,6 +65,17 @@
     <div class="chart-canvas-box detail-chart"><canvas id="chipChart"></canvas></div>
     <p class="chart-note" id="chipNote">-</p>
   </div>
+
+  <div class="panel">
+    <div class="panel-title">คัดแยกมัดเส้นใย/ขุยไผ่/Over-size รายเดือน <span class="tag">กก., แยกส่วน</span></div>
+    <div class="chart-canvas-box detail-chart"><canvas id="pithChart"></canvas></div>
+    <div class="legend-row">
+      <span><i style="background:var(--series-1)"></i> มัดเส้นใย</span>
+      <span><i style="background:var(--series-2)"></i> ขุยไผ่</span>
+      <span><i style="background:var(--series-4)"></i> Over-size</span>
+    </div>
+    <p class="chart-note" id="pithNote">-</p>
+  </div>
 </section>
 
 <section class="panel detail-table-panel">
@@ -83,9 +99,31 @@
       <tfoot id="nodeLedgerFoot"></tfoot>
     </table>
   </div>
+</section>
+
+<section class="panel detail-table-panel">
+  <div class="panel-title">
+    ตารางบันทึกน้ำหนักคัดแยกมัดเส้นใย/ขุยไผ่/Over-size รายเดือน
+    <span class="tag">หน่วย: กก.</span>
+  </div>
+  <div class="table-scroll">
+    <table class="ledger-table" id="pithLedger">
+      <thead>
+        <tr>
+          <th>เดือน</th>
+          <th><span class="dot" style="background:var(--series-1)"></span>มัดเส้นใย</th>
+          <th><span class="dot" style="background:var(--series-2)"></span>ขุยไผ่</th>
+          <th><span class="dot" style="background:var(--series-4)"></span>Over-size</th>
+          <th>รวม</th>
+        </tr>
+      </thead>
+      <tbody id="pithLedgerBody"></tbody>
+      <tfoot id="pithLedgerFoot"></tfoot>
+    </table>
+  </div>
   <p class="chart-note" id="sourceNote">-</p>
 </section>
 
-<script src="assets/material.js?v=1"></script>
+<script src="assets/material.js?v=2"></script>
 </body>
 </html>
