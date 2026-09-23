@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>คู่มือการอ่านแดชบอร์ด - แดชบอร์ดผู้บริหาร</title>
+<meta name="description" content="คู่มืออธิบายความหมาย วิธีประเมิน และประโยชน์ด้านการตัดสินใจของข้อมูลแต่ละส่วนในแดชบอร์ดผู้บริหาร" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=24" />
+</head>
+<body class="detail-body">
+
+<header class="dash-header">
+  <div>
+    <a class="back-link" href="index.html">&larr; กลับไปหน้าแดชบอร์ด</a>
+    <h1>คู่มือการอ่านแดชบอร์ด</h1>
+    <p class="subtitle" id="dashCompany">-</p>
+  </div>
+  <div class="meta-right">
+    <button class="theme-toggle" id="themeToggle" type="button">โหมดมืด/สว่าง</button>
+  </div>
+</header>
+
+<div class="data-source-banner">
+  คู่มือนี้อธิบายทุกส่วนของแดชบอร์ด: แสดงอะไร &middot; ดูอย่างไรว่าดี/แย่ &middot; ช่วยผู้บริหารตัดสินใจเรื่องอะไร — ไล่ตามลำดับที่ปรากฏจริงบนหน้าจอ
+</div>
+
+<!-- ============ 1. แถบ KPI หลัก ============ -->
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--series-1)"></span>แถบ KPI หลัก 4 ตัว (บนสุด)</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M20 9l-4-4-4 4-4-4"/></svg></div>
+        <div class="guide-card-title">รายได้รวม (Total Gross Revenue)</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ยอดขายสะสม 12 เดือนของทั้ง 3 โรงงาน พร้อมกราฟเส้นแนวโน้มรายเดือน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>เทียบเส้นแนวโน้มว่าขึ้นต่อเนื่องหรือแกว่ง เดือนที่ตกฮวบควรสอบถามสาเหตุ (ออเดอร์หาย/ราคาตก)</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ประเมินสุขภาพรายได้ภาพรวม วางแผนกระแสเงินสด/เป้าขายไตรมาสถัดไป — คลิกเข้าไปดูตารางแยกรายโรงงานได้</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="guide-card-title">อัตรากำไรขั้นต้น (Gross Profit Margin)</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>มาตรวัดครึ่งวงกลม % กำไรขั้นต้นปัจจุบัน เทียบเป้าหมาย 45%</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>เข็ม/แถบสียิ่งใกล้ปลายขวายิ่งดี ตัวเลข "คงเหลือ" คือช่องว่างที่ต้องปิดให้ถึงเป้า</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ถ้าต่ำกว่าเป้ามาก ต้องดูต่อว่าต้นทุนวัตถุดิบหรือพลังงานเป็นตัวฉุด (ดูได้ในหน้ารายละเอียด) เพื่อตัดสินใจปรับราคาขายหรือควบคุมต้นทุน</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
+        <div class="guide-card-title">การส่งมอบตรงเวลา ครบถ้วน (OTIF)</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>% คำสั่งซื้อที่ส่งถึงตรงเวลาและครบจำนวน บนแถบไล่สีแดง&rarr;เหลือง&rarr;เขียว</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>เขียว &ge;95% = ดี, เหลือง 90-95% = เฝ้าระวัง, แดง &lt;90% = มีปัญหาการส่งมอบ</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ถ้าอยู่โซนแดง/เหลือง ต้องเจาะดูว่าปัญหาอยู่ที่ "ตรงเวลา" หรือ "ครบถ้วน" (ดูกราฟแยกองค์ประกอบในหน้ารายละเอียด) เพื่อสั่งแก้ที่ต้นตอ เช่น คิวผลิตหรือสต็อก</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--status-critical)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z"/><path d="M12 8v5M12 16.5h.01"/></svg></div>
+        <div class="guide-card-title">ความเสี่ยงการส่งมอบ (Delivery Risk Score)</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>คะแนนความเสี่ยงรวม 0-100 (ยิ่งต่ำยิ่งดี) และระดับ ต่ำ/กลาง/สูง</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>คะแนน &le;33 = เขียว (ต่ำ), 34-66 = เหลือง (กลาง), &gt;66 = แดง (สูง) — ช่องที่สว่างขึ้นคือระดับปัจจุบัน</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ใช้เตือนล่วงหน้าก่อนออเดอร์เสียหายจริง คลิกดูรายละเอียดเพื่อรู้ว่าปัจจัยใดถ่วงคะแนนมากที่สุด แล้วสั่งแก้ก่อนกระทบลูกค้า</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 2. แผนที่โรงงาน ============ -->
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--series-3)"></span>แผนที่โรงงาน (กลางจอ)</div>
+  <div class="guide-grid">
+    <div class="guide-card" style="grid-column: span 2;">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.1 7-12a7 7 0 0 0-14 0c0 4.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg></div>
+        <div class="guide-card-title">หมุดโรงงาน + ป็อปอัพรายโรงงาน</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ตำแหน่งจริง 3 โรงงาน คลิกหมุดเพื่อดูผลผลิต/สต็อก/พลังงาน/สุขภาพเครื่องจักรของโรงงานนั้นแบบเจาะจง</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>สถานะ ONLINE มุมขวาบนของการ์ด = โรงงานทำงานปกติ; แถบสีเขียวใต้ "สุขภาพเครื่องจักร" ยิ่งเต็มยิ่งดี</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>เทียบผลงานโรงงานแบบตัวต่อตัวได้ทันทีโดยไม่ต้องเปิดรายงานแยก เหมาะสำหรับประชุมทบทวนผลระหว่าง 3 โรงงาน</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. รายการฝั่งซ้าย ============ -->
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--series-4)"></span>คอลัมน์ซ้าย: การผลิต &amp; การปฏิบัติการ</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l5 3V9l5 3V9l5 3v9"/><path d="M3 21h18"/></svg></div>
+        <div class="guide-card-title">กำลังผลิตเยื่อไผ่รวม</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ผลผลิตรวม (ตัน/วัน) เทียบกำลังการผลิตสูงสุดของทั้ง 3 โรงงาน ผ่านแถบความคืบหน้า</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>แถบยิ่งเต็มยิ่งใช้กำลังผลิตเต็มที่ ถ้าห่างจากเต็มมากแปลว่ามีกำลังผลิตเหลือ</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ตัดสินใจรับออเดอร์เพิ่ม/ขยายกำลังผลิต หรือถ้าใกล้เต็มควรวางแผนกำลังผลิตสำรอง</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M9 4v16"/></svg></div>
+        <div class="guide-card-title">สรุปตัวชี้วัดรายโรงงาน</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ผลผลิต/สต็อก/% ตอบสนองดีมานด์/% ใช้พื้นที่คลัง เทียบทั้ง 3 โรงงานในตารางเดียว</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>คอลัมน์ "ตอบสนองดีมานด์" ถ้า &ge;95% = ปกติ ต่ำกว่านั้นควรสังเกต (มักขึ้นเป็นสีเตือน)</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>จัดลำดับความสำคัญว่าโรงงานไหนต้องเข้าไปดูแลก่อน โดยไม่ต้องสลับหน้าไปมา</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--status-critical)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 9v5M12 17.5h.01"/></svg></div>
+        <div class="guide-card-title">รายการความผิดปกติของเครื่องจักร</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>จำนวนความผิดปกติ 24 ชม.ล่าสุด แยกตามขั้นตอนเครื่องจักร (ต้ม/ล้าง/ฟอก/อบ/อัด) รายโรงงาน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>ตัวเลขที่ไฮไลต์ (เช่นพื้นสีเหลือง) คือจุดที่เกิดเหตุ ยิ่งตัวเลขสูง/กระจุกที่ขั้นตอนเดียวยิ่งน่าห่วง</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ส่งทีมซ่อมบำรุงลงพื้นที่ถูกจุดถูกเครื่อง ป้องกันไม่ให้ลุกลามเป็นปัญหาการผลิตหรือ OTIF</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 3v3h8V3M8 11h8M8 15h5"/></svg></div>
+        <div class="guide-card-title">การดำเนินการคำสั่งซื้อ</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>รายการออเดอร์ที่กำลังดำเนินการ พร้อมขั้นตอนปัจจุบัน (เตรียมเส้นใย/ผลิตเยื่อ/รอคิว ฯลฯ)</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>ดูสถานะข้อความท้ายแต่ละแถวว่าอยู่ขั้นไหน ค้างที่ขั้นเดิมนานผิดปกติคือสัญญาณล่าช้า</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ติดตามออเดอร์สำคัญแบบเรียลไทม์ และเชื่อมโยงกับคะแนนความเสี่ยงเพื่อดูว่าออเดอร์ไหนต้องเร่ง</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--text-muted)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></div>
+        <div class="guide-card-title">ต้นทุนของเสีย/เศษวัสดุ</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>มูลค่าของเสียต่อเดือน (ล้านบาท) แยกสัดส่วนตามประเภท เช่น เส้นใยตกค้าง/เยื่อ/บรรจุภัณฑ์</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>ยิ่งวงกลม/แท่งของหมวดใดใหญ่ ยิ่งเป็นตัวการหลักของการสูญเสียต้นทุนในเดือนนั้น</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>เลือกลงทุนแก้ปัญหาที่หมวดของเสียใหญ่สุดก่อน เพื่อผลตอบแทนต่อการลงทุนที่คุ้มค่าที่สุด</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 4. รายการฝั่งขวา ============ -->
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--series-5)"></span>คอลัมน์ขวา: ต้นทุน &amp; ทรัพยากร</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div>
+        <div class="guide-card-title">ต้นทุน &amp; วันสำรองคลังรายโรงงาน</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>DOH (วันที่สต็อกใช้ได้ก่อนหมด), ต้นทุนไฟ/น้ำ, ต้นทุนผลิตต่อตัน แยกรายโรงงาน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>DOH ต่ำเกินไป = เสี่ยงวัตถุดิบขาด, สูงเกินไป = เงินจมในสต็อก; เทียบต้นทุนผลิตระหว่างโรงงานเพื่อหาตัวที่แพงผิดปกติ</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>วางแผนจัดซื้อ/สั่งสต็อกล่วงหน้า และตั้งเป้าลดต้นทุนโรงงานที่แพงกว่าค่าเฉลี่ย</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 3 5-7 4 5"/></svg></div>
+        <div class="guide-card-title">ภาพรวมผลการดำเนินงาน</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>เส้นผลผลิตจริงเทียบเส้นแผนส่งมอบ (ตัน) รายเดือน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>เส้นผลผลิตจริงอยู่ต่ำกว่าเส้นแผนต่อเนื่องหลายเดือน = สัญญาณว่าผลิตไม่ทันแผนอย่างเป็นระบบ ไม่ใช่แค่เดือนเดียว</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ปรับแผนการผลิต/กำลังคนให้สอดคล้องความเป็นจริง หรือสอบสวนสาเหตุที่ทำให้แผนกับจริงห่างกัน</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
+        <div class="guide-card-title">มูลค่าสินค้าคงคลัง</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>มูลค่าสต็อกคงเหลือ (บาท) และวันสำรองคลัง (DOH) รายโรงงาน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>มูลค่าสูงไม่ได้แปลว่าดีเสมอไป ต้องดูคู่กับวันสำรอง — สูงทั้งคู่คือเงินทุนจมในสต็อกนาน</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>บริหารเงินทุนหมุนเวียน ตัดสินใจว่าโรงงานไหนควรเร่งระบายสต็อกหรือชะลอสั่งซื้อ</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div>
+        <div class="guide-card-title">ต้นทุนพลังงานสุทธิต่อตัน</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ต้นทุนไฟฟ้า vs ไอน้ำ (บาท/ตัน) รายเดือน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>แท่งไหนสูงขึ้นต่อเนื่องคือต้นทุนพลังงานที่กำลังกัดกินกำไร ควรเทียบกับสัดส่วนพลังงานหมุนเวียนของแต่ละโรงงาน</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ตัดสินใจลงทุนพลังงานทดแทนหรือปรับสัญญาซื้อไฟ/เชื้อเพลิงเพื่อคุมต้นทุนพลังงาน</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 12l-9 10L3 12 12 2Z"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="guide-card-title">ต้นทุนต่อตัน</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ต้นทุนวัตถุดิบ vs ค่าโสหุ้ยคงที่ (บาท/ตัน) รายเดือน</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>สัดส่วนวัตถุดิบมักเป็นตัวแปรใหญ่สุด — ถ้าขยับขึ้นเร็วกว่าราคาขาย มาร์จิ้นจะถูกบีบ (เชื่อมโยงกับกราฟ Margin โดยตรง)</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ต่อรองราคาวัตถุดิบ หรือทบทวนโครงสร้างต้นทุนคงที่เมื่อสัดส่วนเริ่มผิดปกติ</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 5. หน้ารายละเอียด KPI ============ -->
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--series-1)"></span>หน้ารายละเอียด (คลิกจากการ์ด KPI)</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16M8 16l3-4 3 3 4-6"/></svg></div>
+        <div class="guide-card-title">รายละเอียดรายได้รวม</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ตารางบัญชีรายได้สะสมรายเดือน แยกตามโรงงาน พร้อม % เทียบเดือนก่อนและยอดสะสม</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>ตรวจสอบย้อนกลับ (audit) ว่ารายได้รวมมาจากโรงงานไหนเป็นหลัก และเดือนไหนโตหรือหดตัวผิดปกติ</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="4" height="10"/><rect x="10" y="5" width="4" height="15"/><rect x="17" y="13" width="4" height="7"/></svg></div>
+        <div class="guide-card-title">รายละเอียดอัตรากำไรขั้นต้น</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>แนวโน้มมาร์จิ้นเทียบเป้า, กราฟสะพาน (Bridge) รายได้&rarr;หักต้นทุนวัตถุดิบ/พลังงาน/โสหุ้ย&rarr;กำไรขั้นต้น, ตารางเทียบมาร์จิ้นรายโรงงาน</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>กราฟสะพานชี้ตรงว่าต้นทุนก้อนไหน "กิน" มาร์จิ้นมากที่สุด ใช้ตั้งเป้าลดต้นทุนได้ตรงจุดกว่าดูแค่ % รวม</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M6 15l3-5 3 3 4-7"/><circle cx="19" cy="6" r="2"/></svg></div>
+        <div class="guide-card-title">รายละเอียด OTIF</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>แนวโน้ม OTIF พร้อมแถบโซนเขียว/เหลือง/แดง, กราฟแยก "ตรงเวลา" vs "ครบถ้วน", ตารางเทียบรายโรงงานพร้อมงานค้างกำหนด</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>แยกได้ว่าปัญหาส่งมอบมาจากความล่าช้า (ตรงเวลา) หรือของขาด (ครบถ้วน) เพื่อแก้ที่ต้นเหตุถูกฝ่าย (โลจิสติกส์ vs วางแผนผลิต)</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--status-critical)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z"/></svg></div>
+        <div class="guide-card-title">รายละเอียดความเสี่ยงการส่งมอบ</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>แนวโน้มคะแนนความเสี่ยงพร้อมแถบโซน, องค์ประกอบคะแนนความเสี่ยงแยกตามปัจจัย, ตารางคำสั่งซื้อที่มีความเสี่ยงพร้อมเหตุผล</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>รู้ว่าออเดอร์ไหนเสี่ยงและเพราะอะไร (เครื่องจักร/สต็อก/คิวงาน) เพื่อเข้าไปแก้ไขก่อนลูกค้าได้รับผลกระทบจริง</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 6. หน้าวัตถุดิบเพชรบูรณ์ ============ -->
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--series-4)"></span>วัตถุดิบไผ่เข้ากระบวนการเตรียม (เพชรบูรณ์)</div>
+  <div class="guide-grid">
+    <div class="guide-card" style="grid-column: span 2;">
+      <div class="guide-card-head">
+        <div class="guide-icon" style="--gc:var(--series-4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21c4-8 4-14 0-19M20 21c-4-8-4-14 0-19M4 9h16M4 15h16"/></svg></div>
+        <div class="guide-card-title">3 กระบวนการเตรียมวัตถุดิบ (สับย่อย / ตัดแยกข้อปล้อง / คัดแยกมัดเส้นใย)</div>
+      </div>
+      <div class="guide-row"><span class="label">แสดง:</span>ปริมาณไผ่จริง (กก.) ที่ผ่านแต่ละสถานีก่อนเข้ากระบวนการผลิตเยื่อ รายเดือน พร้อม % สัดส่วนของแต่ละองค์ประกอบ (ส่วนที่ใช้ได้ vs ของเสีย)</div>
+      <div class="guide-row"><span class="label">วิธีดู:</span>% ของเสีย/เศษ (ขี้เลื่อยไผ่, Over-size) ที่สูงขึ้นในเดือนใด คือสัญญาณประสิทธิภาพกระบวนการลดลง; ปริมาณที่พุ่งผิดปกติควรสอบถามฝ่ายผลิต</div>
+      <div class="guide-row"><span class="label">ใช้ตัดสินใจ:</span>วางแผนจัดซื้อไผ่ดิบ/กำลังคนล่วงหน้า และตัดสินใจปรับปรุงกระบวนการเมื่อสัดส่วนของเสียสูงผิดปกติ — <b>เป็นข้อมูลจริงชุดแรกของเพชรบูรณ์</b> แต่ยังเป็นข้อมูลต้นน้ำ (วัตถุดิบก่อนผลิต) ไม่ใช่ตัวเลขผลผลิตเยื่อสำเร็จรูป/รายได้/OTIF ซึ่งส่วนนั้นยังเป็นข้อมูลตัวอย่างอยู่</div>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section">
+  <div class="guide-section-title"><span class="guide-section-dot" style="background:var(--text-muted)"></span>สัญลักษณ์สีที่ใช้ทั้งแดชบอร์ด</div>
+  <div class="guide-legend-row">
+    <span><i style="background:var(--status-good)"></i>เขียว = ดี / ผ่านเกณฑ์</span>
+    <span><i style="background:var(--status-warning)"></i>เหลือง = เฝ้าระวัง / ใกล้เกณฑ์</span>
+    <span><i style="background:var(--status-critical)"></i>แดง = มีปัญหา / ต้องเข้าไปแก้ไข</span>
+    <span><i style="background:var(--series-1)"></i>เพชรบูรณ์</span>
+    <span><i style="background:var(--series-2)"></i>สงขลา</span>
+    <span><i style="background:var(--series-3)"></i>เชียงใหม่</span>
+  </div>
+</section>
+
+<script src="assets/guide.js?v=1"></script>
+</body>
+</html>

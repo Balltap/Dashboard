@@ -133,6 +133,8 @@ body {
   padding: 5px 12px;
   font-size: 12px;
   cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
 }
 
 /* ---------- AI search bar (inline in the header, between the title and the meta info) ---------- */
@@ -557,6 +559,47 @@ table.site-table thead th { color: var(--text-muted); font-weight: 500; font-siz
 }
 
 .ledger-table td.cell-wrap { white-space: normal; text-align: left; max-width: 360px; line-height: 1.45; color: var(--text-secondary); }
+
+.guide-section { margin-bottom: 22px; }
+.guide-section-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700; color: var(--text-primary);
+  margin-bottom: 10px;
+}
+.guide-section-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.guide-card {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--series-1) 18%, var(--surface-1)) 0%, var(--surface-1) 55%, color-mix(in srgb, var(--series-4) 16%, var(--surface-1)) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.guide-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+.guide-icon {
+  width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--gc, var(--series-1)) 16%, var(--surface-2));
+  color: var(--gc, var(--series-1));
+}
+.guide-icon svg { width: 18px; height: 18px; }
+.guide-card-title { font-size: 13px; font-weight: 700; color: var(--text-primary); line-height: 1.35; }
+.guide-row { font-size: 12px; line-height: 1.55; color: var(--text-secondary); }
+.guide-row .label { font-weight: 600; color: var(--text-primary); margin-right: 3px; }
+.guide-legend-row {
+  display: flex; flex-wrap: wrap; gap: 14px 22px;
+  font-size: 12px; color: var(--text-secondary);
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 16px;
+}
+.guide-legend-row span { display: flex; align-items: center; gap: 6px; }
+.guide-legend-row i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
 .data-source-banner {
   font-size: 12px;
